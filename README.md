@@ -1,2 +1,2 @@
-# quiz_R
+# quizzes in R
 Having fun with R
