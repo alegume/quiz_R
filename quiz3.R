@@ -16,7 +16,6 @@ segments(x, F_x, x+1, F_x)
 points (1:4, F_x[1:4])
 
 
-
 ## Exercício 4
 x <- seq(1, 3, 0.1)
 theta <- 1
@@ -29,4 +28,26 @@ plot(x, f(x, k), type = "l", xlab = "x", ylab = "f(X)", xlim = c(1, 3), ylim = c
 lines(x, f(x, k2), type = "l", xlab = "x", ylab = "f(X)", xlim = c(1, 3), ylim = c(0, 4))
 abline(v = 1, lty = 3,  col = "red")
 
-     
+
+## Exercício 5
+# Plotar a função densidade de probabilidade e a acumulada 
+x <- seq(0,1,0.001)
+fdp<- function (x) { (20*(x^8))*(1-x) }
+fda<- function (x) { 10*(x^9) - 9*(x^10) }
+
+par(mfrow=c(1,2), pty="s")
+par(pty = "s")
+# Eixos na mesma escala
+plot(x, fdp(x), type="l", xlab = "x", 
+     ylab = "f(x)", xlim = c(0,1), ylim = c(0,1), lwd="2")
+text(0.3, .75, expression (f(x) == paste(90*x^8)*(1-x)),
+     cex = 1.2)
+plot(x, fda(x), type="l", xlab="x", ylab = "F(x)", 
+     xlim = c(0,1), ylim = c(0,1), lwd="2") 
+text(0.4, 0.75, expression(F(X) == paste(integral(f(y) * dy, -infinity, x), " ", "  ==  " ,
+10*x^9 + 9*x^10)), cex = 1.2)
+
+
+# Testes
+x <- c(12, 55, 59, 61, 70, 72, 77, 79, 80, 88, 85, 90, 91, 75, 75, 77, 88, 82, 84, 84, 88, 90, 70, 77, 77, 77, 77, 77, 75, 76, 78 , 100, 100, 100, 100, 100, 100, 100, 100, 100, 100)
+stem(x)
