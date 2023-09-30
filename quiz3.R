@@ -49,9 +49,12 @@ text(0.4, 0.75, expression(F(X) == paste(integral(f(y) * dy, -infinity, x), " ",
 
 
 # Testes
-x <- c(12, 55, 59, 61, 70, 75, 75, 75, 75, 76, 79,
-       82, 84, 85, 88, 90, 94, 95, 100, 100, 100, 100)
+x <- c(12, 55, 59, 61, 70, 75, 75, 75, 76, 79,
+       82, 85, 88, 90, 94, 95, 100, 100, 100, 100)
+length(x)
 stem(x, scale=2)
 x <- sort(x, decreasing = F)
 stripchart(x, method = "stack", frame.plot = F, 
            at=0.01, pch=20, cex=1, las=1)
+hist(x, freq = T)
+length(x[x>=40])
