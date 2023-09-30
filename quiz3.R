@@ -57,4 +57,7 @@ x <- sort(x, decreasing = F)
 stripchart(x, method = "stack", frame.plot = F, 
            at=0.01, pch=20, cex=1, las=1)
 hist(x, freq = T)
+
+boxplot(x)
+
 length(x[x>=40])
