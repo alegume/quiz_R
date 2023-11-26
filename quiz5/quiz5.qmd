@@ -1,0 +1,33 @@
+---
+title: ""
+format:
+  html:
+    code-overflow: wrap
+prefer-html: true
+lang: pt-BR
+---
+
+::: {style="text-align:center"}
+<h1>Probabilidade e Estatística - QUIZ 5</h1>
+:::
+
+![](images/ita.jpg){fig-align="center" width="200"}
+
+::: {style="text-align:center; font-size:20px;"}
+**Instituto Tecnológico de Aeronáutica**
+
+**Professor**: Mauri Aparecido de Oliveira
+
+**Aluno**: Alexandre A. A. M. de Abreu
+:::
+
+## 1. Distribuição Normal
+
+A amostra de dados para realização dos testes de normalidade é apresentada a seguir:
+```{r}
+dados <- c(149.3355, 140.3779, 145.7254, 149.8931, 139.6168, 149.1934, 129.6147, 134.7523, 167.8030, 171.7407, 157.5422, 160.2664, 155.4553, 142.5989, 134.9844, 148.5172, 163.1447, 131.0138, 130.2423, 167.2239, 149.4015, 145.6802, 160.3472, 121.1775, 136.7295, 162.2381, 150.7192, 117.8144, 137.3630, 158.6373, 168.0833, 133.9263, 150.9102, 149.4811, 167.4367, 178.0970, 138.4903, 148.6764, 181.0990, 167.3345, 147.0679, 156.1410, 148.8734, 140.9484, 147.6408, 134.5726, 184.6812, 134.6648, 146.8130, 167.4161)
+summary(dados)
+
+```
+
+

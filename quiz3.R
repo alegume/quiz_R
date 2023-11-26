@@ -29,7 +29,7 @@ lines(x, f(x, k2), type = "l", xlab = "x", ylab = "f(X)", xlim = c(1, 3), ylim =
 abline(v = 1, lty = 3,  col = "red")
 
 
-## Exercício 5
+## Exercício 9.6
 # Plotar a função densidade de probabilidade e a acumulada 
 x <- seq(0,1,0.001)
 fdp<- function (x) { (20*(x^8))*(1-x) }
