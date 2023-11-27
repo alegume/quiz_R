@@ -107,13 +107,13 @@ Probabilidade e Estatística - QUIZ 5
 <li>Kolmogorov-Smirnov</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(z.dados, <span class="dv">0</span>, <span class="dv">1</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(z.dados, <span class="st">"pnorm"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Two-sample Kolmogorov-Smirnov test
+    One-sample Kolmogorov-Smirnov test
 
-data:  z.dados and 0
-D = 0.6, p-value = 0.8235
+data:  z.dados
+D = 0.1167, p-value = 0.4688
 alternative hypothesis: two-sided</code></pre>
 </div>
 </div>
@@ -253,6 +253,159 @@ D = 0.1167, p-value = 0.08619</code></pre>
 <p><img src="quiz5_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+</section>
+<section id="identificação-de-distribuição" class="level2">
+<h2 class="anchored" data-anchor-id="identificação-de-distribuição">2. Identificação de distribuição</h2>
+<p>Dados de uma variável aleatória X:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.9993382</span>, <span class="fl">1.4414849</span>, <span class="fl">2.1477166</span>, <span class="fl">2.1087828</span>, <span class="fl">2.1342892</span>, <span class="fl">2.1844835</span>, <span class="fl">1.5091879</span>, <span class="fl">2.0467623</span>, <span class="fl">1.0642741</span>, <span class="fl">2.1302612</span>, <span class="fl">1.8389897</span>, <span class="fl">1.8924614</span>, <span class="fl">1.9316041</span>, <span class="fl">1.5602204</span>, <span class="fl">1.6991884</span>, <span class="fl">1.7228081</span>, <span class="fl">1.5197833</span>, <span class="fl">1.7659242</span>, <span class="fl">0.6914335</span>, <span class="fl">1.4598759</span>, <span class="fl">2.0017607</span>, <span class="fl">1.5139209</span>, <span class="fl">1.8334780</span>, <span class="fl">1.8847480</span>, <span class="fl">1.9072389</span>, <span class="fl">1.6294414</span>, <span class="fl">1.9068617</span>, <span class="fl">1.7744973</span>, <span class="fl">2.4300455</span>, <span class="fl">1.8958270</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="a-faça-a-identificação-da-distribuição." class="level4">
+<h4 class="anchored" data-anchor-id="a-faça-a-identificação-da-distribuição.">a) Faça a identificação da distribuição.</h4>
+<p>Pelo diagrama de Cullen e Frei, os dados parecem seguir uma distribuição Lognormal ou Weibull.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fitdistrplus)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(logspline)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">descdist</span>(dados, <span class="at">discrete =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>summary statistics
+------
+min:  0.6914335   max:  2.430045 
+median:  1.861869 
+mean:  1.787556 
+estimated sd:  0.3498879 
+estimated skewness:  -1.133072 
+estimated kurtosis:  5.391445 </code></pre>
+</div>
+</div>
+<p>Os gráficos de ajuste de distribuição, dão indícios de que a distribuição Weibull é a que melhor se ajusta aos dados.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>dados_norm <span class="ot">&lt;-</span> (dados <span class="sc">-</span> <span class="fu">min</span>(dados))<span class="sc">/</span>(<span class="fu">max</span>(dados) <span class="sc">-</span> <span class="fu">min</span>(dados))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>weibull <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"weibull"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>gamma <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>lognormal <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"lnorm"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>normal <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"norm"</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados_norm, <span class="st">"beta"</span>, <span class="at">method =</span> <span class="st">"mme"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(weibull)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gamma)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lognormal)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(normal)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>O Critério de Informacao de Akaike (AIC) confirma que <strong>a distribuição Weibull</strong> é a que melhor se ajusta aos dados.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(weibull<span class="sc">$</span>aic, gamma<span class="sc">$</span>aic, lognormal<span class="sc">$</span>aic, normal<span class="sc">$</span>aic, beta<span class="sc">$</span>aic)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>21.97718 31.70725 36.1033 25.11073 Inf</code></pre>
+</div>
+</div>
+</section>
+<section id="b-compare-os-resultados-gerados-pelo-teste-de-kolmogorov-smirnov-considerando-as-distribuições-gama-lognormal-e-weibull." class="level4">
+<h4 class="anchored" data-anchor-id="b-compare-os-resultados-gerados-pelo-teste-de-kolmogorov-smirnov-considerando-as-distribuições-gama-lognormal-e-weibull.">b) Compare os resultados gerados pelo teste de Kolmogorov-Smirnov considerando as distribuições Gama, Lognormal e Weibull.</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mle)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting of the distribution ' gamma ' by maximum likelihood 
+Parameters : 
+      estimate Std. Error
+shape 20.98456   5.375681
+rate  11.73920   3.043447
+Loglikelihood:  -13.85363   AIC:  31.70725   BIC:  34.50965 
+Correlation matrix:
+          shape      rate
+shape 1.0000000 0.9881127
+rate  0.9881127 1.0000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pgamma"</span>, <span class="fl">20.98456</span>, <span class="fl">11.73920</span>, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-sample Kolmogorov-Smirnov test
+
+data:  dados
+D = 0.14176, p-value = 0.5829
+alternative hypothesis: two-sided</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"lnorm"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mle)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting of the distribution ' lnorm ' by maximum likelihood 
+Parameters : 
+         estimate Std. Error
+meanlog 0.5568348 0.04322583
+sdlog   0.2367576 0.03056282
+Loglikelihood:  -16.05165   AIC:  36.1033   BIC:  38.90569 
+Correlation matrix:
+        meanlog sdlog
+meanlog       1     0
+sdlog         0     1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"plnorm"</span>, <span class="at">meanlog=</span><span class="fl">0.5568348</span>, <span class="at">sdlog=</span><span class="fl">0.2367576</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-sample Kolmogorov-Smirnov test
+
+data:  dados
+D = 0.15513, p-value = 0.4658
+alternative hypothesis: two-sided</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"weibull"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mle)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting of the distribution ' weibull ' by maximum likelihood 
+Parameters : 
+      estimate Std. Error
+shape 6.513198 0.94665004
+scale 1.918411 0.05622354
+Loglikelihood:  -8.988588   AIC:  21.97718   BIC:  24.77957 
+Correlation matrix:
+          shape     scale
+shape 1.0000000 0.2919704
+scale 0.2919704 1.0000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pweibull"</span>, <span class="at">shape =</span> <span class="fl">6.513198</span>, <span class="at">scale =</span> <span class="fl">1.918411</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-sample Kolmogorov-Smirnov test
+
+data:  dados
+D = 0.091733, p-value = 0.9624
+alternative hypothesis: two-sided</code></pre>
+</div>
+</div>
+<p>Todos os testes apresentaram p-valores que não justificam rejeitar as respectivas hipóteses nulas. Entretanto, a escolha da função de distribuição que melhor ajusta aos dados é a Weibull, pois além de apresentar p-valor = 0.9624, é a que obteve melhor Critério de Informacao de Akaike.</p>
+</section>
+<section id="c-plotar-a-função-e-o-histograma-para-distribuição-escolhida." class="level4">
+<h4 class="anchored" data-anchor-id="c-plotar-a-função-e-o-histograma-para-distribuição-escolhida.">c) Plotar a função e o histograma para distribuição escolhida.</h4>
+</section>
+<section id="d-verifique-se-a-área-sob-a-curva-estimada-é-igual-a-1." class="level4">
+<h4 class="anchored" data-anchor-id="d-verifique-se-a-área-sob-a-curva-estimada-é-igual-a-1.">d) Verifique se a área sob a curva estimada é igual a 1.</h4>
+</section>
+<section id="e-para-a-distribuição-escolhida-calcule-a-área-gerada-no-intervalo-1-15.-plotar-e-destacar-essa-área." class="level4">
+<h4 class="anchored" data-anchor-id="e-para-a-distribuição-escolhida-calcule-a-área-gerada-no-intervalo-1-15.-plotar-e-destacar-essa-área.">e) Para a distribuição escolhida, calcule a área gerada no intervalo [1; 1,5]. Plotar e destacar essa área.</h4>
 </section>
 </section>
 
