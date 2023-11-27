@@ -396,16 +396,55 @@ D = 0.091733, p-value = 0.9624
 alternative hypothesis: two-sided</code></pre>
 </div>
 </div>
-<p>Todos os testes apresentaram p-valores que não justificam rejeitar as respectivas hipóteses nulas. Entretanto, a escolha da função de distribuição que melhor ajusta aos dados é a Weibull, pois além de apresentar p-valor = 0.9624, é a que obteve melhor Critério de Informacao de Akaike.</p>
+<p>Todos os testes apresentaram p-valores que não justificam rejeitar as respectivas hipóteses nulas. Entretanto, a escolha da função de distribuição que melhor ajusta os dados é a Weibull, pois além de apresentar p-valor = 0.9624, é a que obteve melhor Critério de Informacao de Akaike.</p>
 </section>
 <section id="c-plotar-a-função-e-o-histograma-para-distribuição-escolhida." class="level4">
 <h4 class="anchored" data-anchor-id="c-plotar-a-função-e-o-histograma-para-distribuição-escolhida.">c) Plotar a função e o histograma para distribuição escolhida.</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>w_2_1 <span class="ot">&lt;-</span> <span class="fu">rweibull</span>(<span class="dv">2000</span>, <span class="at">shape =</span> <span class="fl">6.513198</span>, <span class="at">scale =</span> <span class="fl">1.918411</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(w_2_1, <span class="at">lwd =</span> <span class="dv">1</span>, <span class="at">ylab =</span> <span class="st">"f(x)"</span>, <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">freq =</span> F, <span class="at">main =</span> <span class="st">""</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x =</span> <span class="fu">density</span>(w_2_1))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 <section id="d-verifique-se-a-área-sob-a-curva-estimada-é-igual-a-1." class="level4">
 <h4 class="anchored" data-anchor-id="d-verifique-se-a-área-sob-a-curva-estimada-é-igual-a-1.">d) Verifique se a área sob a curva estimada é igual a 1.</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">alpha =</span> <span class="fl">6.513198</span>, <span class="at">beta =</span> <span class="fl">1.918411</span>) {(alpha<span class="sc">/</span>(beta<span class="sc">^</span>alpha))<span class="sc">*</span>(x<span class="sc">^</span>(alpha<span class="dv">-1</span>))<span class="sc">*</span>(<span class="fu">exp</span>(<span class="sc">-</span>(x<span class="sc">/</span>beta)<span class="sc">^</span>alpha))}</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="at">by =</span> .<span class="dv">01</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>area <span class="ot">&lt;-</span> <span class="fu">integrate</span>(w, <span class="dv">0</span>, <span class="dv">1000</span>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>area</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 with absolute error &lt; 0.00012</code></pre>
+</div>
+</div>
 </section>
 <section id="e-para-a-distribuição-escolhida-calcule-a-área-gerada-no-intervalo-1-15.-plotar-e-destacar-essa-área." class="level4">
 <h4 class="anchored" data-anchor-id="e-para-a-distribuição-escolhida-calcule-a-área-gerada-no-intervalo-1-15.-plotar-e-destacar-essa-área.">e) Para a distribuição escolhida, calcule a área gerada no intervalo [1; 1,5]. Plotar e destacar essa área.</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>a1 <span class="ot">&lt;-</span> <span class="fu">pweibull</span>(<span class="dv">1</span>, <span class="at">shape =</span> <span class="fl">6.513198</span>, <span class="at">scale =</span> <span class="fl">1.918411</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>a2 <span class="ot">&lt;-</span> <span class="fu">pweibull</span>(<span class="fl">1.5</span>, <span class="at">shape =</span> <span class="fl">6.513198</span>, <span class="at">scale =</span> <span class="fl">1.918411</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>probabilidade <span class="ot">&lt;-</span> a2 <span class="sc">-</span> a1</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>probabilidade</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1681586</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(a1, <span class="fu">seq</span>(a1, a2, <span class="at">l=</span><span class="dv">100</span>), a2)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">dweibull</span>(<span class="fu">seq</span>(a1, a2, <span class="at">l=</span><span class="dv">100</span>), <span class="at">shape =</span> <span class="fl">6.513198</span>, <span class="at">scale =</span> <span class="fl">1.918411</span>), <span class="dv">0</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(y)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(w, <span class="dv">0</span>, <span class="dv">5</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">col=</span><span class="st">"gray"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 </section>
 

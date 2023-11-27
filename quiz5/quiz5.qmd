@@ -205,6 +205,35 @@ Todos os testes apresentaram p-valores que não justificam rejeitar as respectiv
 
 #### c) Plotar a função e o histograma para distribuição escolhida.
 
+```{r warning=FALSE}
+w_2_1 <- rweibull(2000, shape = 6.513198, scale = 1.918411)
+hist(w_2_1, lwd = 1, ylab = "f(x)", xlab = "", freq = F, main = "")
+lines(x = density(w_2_1))
+```
+
 #### d) Verifique se a área sob a curva estimada é igual a 1.
+```{r}
+w <- function(x, alpha = 6.513198, beta = 1.918411) {(alpha/(beta^alpha))*(x^(alpha-1))*(exp(-(x/beta)^alpha))}
+x <- seq(0, 5, by = .01)
+area <- integrate(w, 0, 1000)
+area
+```
 
 #### e) Para a distribuição escolhida, calcule a área gerada no intervalo \[1; 1,5\]. Plotar e destacar essa área.
+```{r}
+a1 <- pweibull(1, shape = 6.513198, scale = 1.918411)
+a2 <- pweibull(1.5, shape = 6.513198, scale = 1.918411)
+probabilidade <- a2 - a1
+probabilidade
+```
+```{r}
+a1 <- qweibull(a1, shape = 6.513198, scale = 1.918411)
+a2 <- qweibull(a2, shape = 6.513198, scale = 1.918411)
+x = c(a1, seq(a1, a2, l=100), a2)
+y = c(0, w(seq(a1, a2, l=100)), 0)
+hist(y)
+plot(w, 0, 5)
+polygon(x = x, y = y, col="gray")
+
+```
+
