@@ -65,7 +65,6 @@ Considerando um nível de significância de 5%, não rejeitamos a hipótese de q
 ------------------------------------------------------------------------
 
 #### b) Probabilidade de que uma chamada demore entre 125 e 150 segundos.
-
 ```{r}
 media <- 150
 sigma <- 15
@@ -77,13 +76,10 @@ phi <- function(x, mi = 0, sigma = 1) {
   (1/(sigma*sqrt(2*pi))) *exp((-1/2)*((x-mi)/sigma)^2) 
 }
 
-x1 = c(-5, seq(-5, z1, l=100), z1)
-y1 = c(0, phi(seq(-5, z1, l=100)), 0)
-x2 = c(z2, seq(z2, 5, l=100), 5)
-y2 = c(0, phi(seq(z2, 5, l=100)), 0)
+x = c(z1, seq(z1, z2, l=100), z2)
+y = c(0, phi(seq(z1, z2, l=100)), 0)
 plot(phi, -5, 5)
-polygon(x = x1, y = y1, col="gray")
-polygon(x = x2, y = y2, col="gray")
+polygon(x = x, y = y, col="gray")
 ```
 
 ####  c) Probabilidade de que uma chamada demore menos de 125 segundos.
@@ -92,14 +88,46 @@ z1 <- (125  - media) / sigma
 probabilidade <- pnorm(z1)
 probabilidade
 
-x1 = c(-5, seq(-5, z1, l=100), z1)
-y1 = c(0, phi(seq(-5, z1, l=100)), 0)
+x = c(-5, seq(-5, z1, l=100), z1)
+y = c(0, phi(seq(-5, z1, l=100)), 0)
 plot(phi, -5, 5)
-polygon(x = x1, y = y1, col="gray")
+polygon(x = x, y = y, col="gray")
 ```
 
 
 
 #### d) Probabilidade de que uma chamada demore entre 145 e 155 segundos.
+```{r}
+media <- 150
+sigma <- 15
+z1 <- (145  - media) / sigma
+z2 <- (155  - media) / sigma
+probabilidade <- pnorm(z2) - pnorm(z1)
+probabilidade
+phi <- function(x, mi = 0, sigma = 1) { 
+  (1/(sigma*sqrt(2*pi))) *exp((-1/2)*((x-mi)/sigma)^2) 
+}
+
+x = c(z1, seq(z1, z2, l=100), z2)
+y = c(0, phi(seq(z1, z2, l=100)), 0)
+plot(phi, -5, 5)
+polygon(x = x, y = y, col="gray")
+```
 
 #### e) Probabilidade de que uma chamada demore entre 160 e 165 segundos.
+```{r}
+media <- 150
+sigma <- 15
+z1 <- (160  - media) / sigma
+z2 <- (165  - media) / sigma
+probabilidade <- pnorm(z2) - pnorm(z1)
+probabilidade
+phi <- function(x, mi = 0, sigma = 1) { 
+  (1/(sigma*sqrt(2*pi))) *exp((-1/2)*((x-mi)/sigma)^2) 
+}
+
+x = c(z1, seq(z1, z2, l=100), z2)
+y = c(0, phi(seq(z1, z2, l=100)), 0)
+plot(phi, -5, 5)
+polygon(x = x, y = y, col="gray")
+```
