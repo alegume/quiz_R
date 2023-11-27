@@ -24,10 +24,82 @@ lang: pt-BR
 ## 1. Distribuição Normal
 
 A amostra de dados para realização dos testes de normalidade é apresentada a seguir:
+
 ```{r}
 dados <- c(149.3355, 140.3779, 145.7254, 149.8931, 139.6168, 149.1934, 129.6147, 134.7523, 167.8030, 171.7407, 157.5422, 160.2664, 155.4553, 142.5989, 134.9844, 148.5172, 163.1447, 131.0138, 130.2423, 167.2239, 149.4015, 145.6802, 160.3472, 121.1775, 136.7295, 162.2381, 150.7192, 117.8144, 137.3630, 158.6373, 168.0833, 133.9263, 150.9102, 149.4811, 167.4367, 178.0970, 138.4903, 148.6764, 181.0990, 167.3345, 147.0679, 156.1410, 148.8734, 140.9484, 147.6408, 134.5726, 184.6812, 134.6648, 146.8130, 167.4161)
-summary(dados)
+z.dados <- scale(dados)
+```
+
+#### a) Testes de Normalidade
+
+i)  Kolmogorov-Smirnov
+
+```{r}
+ks.test(z.dados, 0, 1)
+```
+
+ii) Shapiro-Wilk
+
+```{r}
+shapiro.test(dados)
+```
+
+iii) Anderson-Darlin
+
+```{r}
+library(nortest)
+ad.test(dados)
+```
+
+iv) Lilliefors
+
+```{r}
+lillie.test(dados)
 
 ```
 
+**Interpretação dos resultados:**
 
+Considerando um nível de significância de 5%, não rejeitamos a hipótese de que os dados seguem a distrição normal, pois os p-valores são todos maiores do que 0,05.
+
+------------------------------------------------------------------------
+
+#### b) Probabilidade de que uma chamada demore entre 125 e 150 segundos.
+
+```{r}
+media <- 150
+sigma <- 15
+z1 <- (125  - media) / sigma
+z2 <- (150  - media) / sigma
+probabilidade <- pnorm(z2) - pnorm(z1)
+probabilidade
+phi <- function(x, mi = 0, sigma = 1) { 
+  (1/(sigma*sqrt(2*pi))) *exp((-1/2)*((x-mi)/sigma)^2) 
+}
+
+x1 = c(-5, seq(-5, z1, l=100), z1)
+y1 = c(0, phi(seq(-5, z1, l=100)), 0)
+x2 = c(z2, seq(z2, 5, l=100), 5)
+y2 = c(0, phi(seq(z2, 5, l=100)), 0)
+plot(phi, -5, 5)
+polygon(x = x1, y = y1, col="gray")
+polygon(x = x2, y = y2, col="gray")
+```
+
+####  c) Probabilidade de que uma chamada demore menos de 125 segundos.
+```{r}
+z1 <- (125  - media) / sigma
+probabilidade <- pnorm(z1)
+probabilidade
+
+x1 = c(-5, seq(-5, z1, l=100), z1)
+y1 = c(0, phi(seq(-5, z1, l=100)), 0)
+plot(phi, -5, 5)
+polygon(x = x1, y = y1, col="gray")
+```
+
+
+
+#### d) Probabilidade de que uma chamada demore entre 145 e 155 segundos.
+
+#### e) Probabilidade de que uma chamada demore entre 160 e 165 segundos.
