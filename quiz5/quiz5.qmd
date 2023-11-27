@@ -227,11 +227,10 @@ probabilidade <- a2 - a1
 probabilidade
 ```
 ```{r}
-a1 <- qweibull(a1, shape = 6.513198, scale = 1.918411)
-a2 <- qweibull(a2, shape = 6.513198, scale = 1.918411)
-x = c(a1, seq(a1, a2, l=100), a2)
-y = c(0, w(seq(a1, a2, l=100)), 0)
-hist(y)
+q1 <- qweibull(a1, shape = 6.513198, scale = 1.918411)
+q2 <- qweibull(a2, shape = 6.513198, scale = 1.918411)
+x = c(a1, seq(q1, q2, l=100), a2)
+y = c(0, w(seq(q1, q2, l=100)), 0)
 plot(w, 0, 5)
 polygon(x = x, y = y, col="gray")
 

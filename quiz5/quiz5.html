@@ -433,9 +433,11 @@ alternative hypothesis: two-sided</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(a1, <span class="fu">seq</span>(a1, a2, <span class="at">l=</span><span class="dv">100</span>), a2)</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">dweibull</span>(<span class="fu">seq</span>(a1, a2, <span class="at">l=</span><span class="dv">100</span>), <span class="at">shape =</span> <span class="fl">6.513198</span>, <span class="at">scale =</span> <span class="fl">1.918411</span>), <span class="dv">0</span>)</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(y)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>a1 <span class="ot">&lt;-</span> <span class="fu">qweibull</span>(a1, <span class="at">shape =</span> <span class="fl">6.513198</span>, <span class="at">scale =</span> <span class="fl">1.918411</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>a2 <span class="ot">&lt;-</span> <span class="fu">qweibull</span>(a2, <span class="at">shape =</span> <span class="fl">6.513198</span>, <span class="at">scale =</span> <span class="fl">1.918411</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(a1, <span class="fu">seq</span>(a1, a2, <span class="at">l=</span><span class="dv">100</span>), a2)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">w</span>(<span class="fu">seq</span>(a1, a2, <span class="at">l=</span><span class="dv">100</span>)), <span class="dv">0</span>)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(y)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="quiz5_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
