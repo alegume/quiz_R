@@ -277,7 +277,7 @@ Portanto, o intervalo de confiaça de 99% para média da amostra da inflação �
 
 ?????
 
-```{r}
+```{r echo=FALSE}
 # Calcule o valor de t
 t_value <- (3 / 2) 
 t_value
@@ -349,9 +349,6 @@ id_dist <- function (dados) {
   lognormal <- fitdist(dados, "lnorm")
   normal <- fitdist(dados, "norm")
   beta <- fitdist(dados_norm, "beta", method = "mme")
-  # adj <-  dados_norm[(dados_norm>0.5) & (dados_norm<1)]
-  # mean(adj)
-  # mean(dados_norm)
   summary(dados_norm)
   cat("Weibull: ")
   plot(weibull)
