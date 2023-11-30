@@ -175,8 +175,16 @@ plot(normal)
 O Critério de Informacao de Akaike (AIC) confirma que **a distribuição Weibull** é a que melhor se ajusta aos dados.
 
 ```{r}
-cat(weibull$aic, gamma$aic, lognormal$aic, normal$aic, beta$aic)
+cat(paste("Weibull: ", weibull$aic, "\nGamma: ", gamma$aic, "\nLognormal: ", lognormal$aic, "\nNormal: ", normal$aic, "\nBeta: ", beta$aic))
 ```
+
+```{r}
+mle <- fitdist(dados, "weibull", method="mle")
+mle$estimate
+ks.test(dados, "pweibull", shape = 6.513198, scale = 1.918411, exact=FALSE)
+```
+**Portanto, com um nível de significância de 5%, não se rejeita a hipótese de que os dados se ajustem a uma distribuição Weibull, pois o p-valor é 0,9624.**
+
 
 #### b) Compare os resultados gerados pelo teste de Kolmogorov-Smirnov considerando as distribuições Gama, Lognormal e Weibull.
 
