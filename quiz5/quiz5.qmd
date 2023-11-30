@@ -60,7 +60,7 @@ lillie.test(dados)
 
 **Interpretação dos resultados:**
 
-Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados seguem a distrição normal, pois os p-valores são todos maiores do que 0,05.
+Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados seguem a distrição normal, pois os p-valores são maiores do que 0,05 para todos os testes de normalidades.
 
 ------------------------------------------------------------------------
 
@@ -73,15 +73,17 @@ z1 <- (125  - media) / sigma
 z2 <- (150  - media) / sigma
 probabilidade <- pnorm(z2) - pnorm(z1)
 probabilidade
-phi <- function(x, mi = 0, sigma = 1) { 
-  (1/(sigma*sqrt(2*pi))) *exp((-1/2)*((x-mi)/sigma)^2) 
+phi <- function(x) { 
+  (1/(sigma*sqrt(2*pi))) *exp((-1/2)*((x-media)/sigma)^2) 
 }
-
-x = c(z1, seq(z1, z2, l=100), z2)
-y = c(0, phi(seq(z1, z2, l=100)), 0)
-plot(phi, -5, 5)
+x = c(125, seq(125, 150, l=100), 150)
+y = c(0, phi(seq(125, 150, l=100)), 0)
+plot(phi, 100, 200)
 polygon(x = x, y = y, col="gray")
 ```
+
+**A probabilidade de que uma chamada demore entre 125 e 150 segundos é de 45,09603%.**
+
 
 #### c) Probabilidade de que uma chamada demore menos de 125 segundos.
 
