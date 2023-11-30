@@ -67,8 +67,8 @@ Considerando um nível de significância de 5%, não rejeita-se a hipótese de q
 #### b) Probabilidade de que uma chamada demore entre 125 e 150 segundos.
 
 ```{r}
-media <- 150
-sigma <- 15
+media <- mean(dados)
+sigma <- sd(dados)
 z1 <- (125  - media) / sigma
 z2 <- (150  - media) / sigma
 probabilidade <- pnorm(z2) - pnorm(z1)
@@ -88,53 +88,44 @@ polygon(x = x, y = y, col="gray")
 #### c) Probabilidade de que uma chamada demore menos de 125 segundos.
 
 ```{r}
-z1 <- (125  - media) / sigma
-probabilidade <- pnorm(z1)
+probabilidade <- integrate(phi, -Inf, 125)
 probabilidade
 
-x = c(-5, seq(-5, z1, l=100), z1)
-y = c(0, phi(seq(-5, z1, l=100)), 0)
-plot(phi, -5, 5)
+x = c(100, seq(100, 125, l=100), 125)
+y = c(0, phi(seq(100, 125, l=100)), 0)
+plot(phi, 100, 200)
 polygon(x = x, y = y, col="gray")
 ```
+** A probabilidade de que uma chamada demore menos de 125 segundos é de 4,824296%.**
+
 
 #### d) Probabilidade de que uma chamada demore entre 145 e 155 segundos.
 
 ```{r}
-media <- 150
-sigma <- 15
 z1 <- (145  - media) / sigma
 z2 <- (155  - media) / sigma
 probabilidade <- pnorm(z2) - pnorm(z1)
 probabilidade
-phi <- function(x, mi = 0, sigma = 1) { 
-  (1/(sigma*sqrt(2*pi))) *exp((-1/2)*((x-mi)/sigma)^2) 
-}
-
-x = c(z1, seq(z1, z2, l=100), z2)
-y = c(0, phi(seq(z1, z2, l=100)), 0)
-plot(phi, -5, 5)
+x = c(145, seq(145, 155, l=100), 155)
+y = c(0, phi(seq(145, 155, l=100)), 0)
+plot(phi, 100, 200)
 polygon(x = x, y = y, col="gray")
 ```
+**A probabilidade de que uma chamada demore entre 145 e 155 segundos é de 26,01309%.**
 
 #### e) Probabilidade de que uma chamada demore entre 160 e 165 segundos.
 
 ```{r}
-media <- 150
-sigma <- 15
 z1 <- (160  - media) / sigma
 z2 <- (165  - media) / sigma
 probabilidade <- pnorm(z2) - pnorm(z1)
 probabilidade
-phi <- function(x, mi = 0, sigma = 1) { 
-  (1/(sigma*sqrt(2*pi))) *exp((-1/2)*((x-mi)/sigma)^2) 
-}
-
-x = c(z1, seq(z1, z2, l=100), z2)
-y = c(0, phi(seq(z1, z2, l=100)), 0)
-plot(phi, -5, 5)
+x = c(160, seq(160, 165, l=100), 165)
+y = c(0, phi(seq(160, 165, l=100)), 0)
+plot(phi, 100, 200)
 polygon(x = x, y = y, col="gray")
 ```
+**A probabilidade de que uma chamada demore entre 160 e 165 segundos é de 9,387641%.**
 
 ## 2. Identificação de distribuição
 
