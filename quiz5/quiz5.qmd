@@ -244,14 +244,14 @@ Amostra aleatória simples com os valores de inflação para os anos de 2013 a 2
 inflacao <- c(5.91, 6.41, 10.67, 6.29, 2.95, 3.75, 4.31, 4.52, 10.06, 5.79)
 ```
 
-####a) Faça os testes de Shapiro-Wilk e de Lilliefors para verificar a normalidade. Qual é sua conclusão?
+#### a) Faça os testes de Shapiro-Wilk e de Lilliefors para verificar a normalidade. Qual é sua conclusão?
 
 ```{r}
 shapiro.test(inflacao)
 lillie.test(inflacao)
 ```
 
-Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados seguem a distrição normal, considerando que ambos p-valores são todos maiores do que 0,05.
+Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados amostrais de inflação seguem a distrição normal, considerando que ambos p-valores são maiores do que 0,05.
 
 #### b) Usando esses dados, construa um intervalo de confiança de 99% para a média da inflação.
 
@@ -269,32 +269,23 @@ cat (LI, LS)
 LS - LI
 ```
 
-Portanto, o intervalo de confiaça de 99% para média da amostra da inflação é \[3.457911, 8.674089\].
+Portanto, pode-se afirmar com nível de confiaça de 99% que a média da inflação estará no intervalo \[3.457911, 8.674089\].
 
 #### c) Os especialistas têm a opinião de que o intervalo calculado para a média é muito amplo e querem um intervalo de comprimento total igual a 3. Encontre o nível de confiança para esse novo intervalo.
 
-?????
-
-```{r echo=FALSE}
+```{r}
 # Calcule o valor de t
-t_value <- (3 / 2) 
-t_value
-# Encontre o nível de confiança correspondente
-c <- 2 * (1 - pt(t_value, df = gl))
-c = .9
-
-alpha <- 1 - c
-alpha
-t <- qt(alpha/2, gl, lower.tail = FALSE)
-t
+t <- ((3/2) * sqrt(n)) / s
 LI <- x_bar - t*(s/(n^0.5))
 LS <- x_bar + t*(s/(n^0.5))
-cat (LI, LS)
-LS - LI
-
+print(paste0("Intervalo: [", LI, ", " , LS, "]"))
+alpha <- 2 * (pt(t, df = gl, lower.tail=FALSE))
+alpha
+c <- 1 - alpha
+c
 ```
 
-??????
+O intervalo [4.566,7.566] de comprimento total igual a 3 é obtido para um alpha = 0.09443553 e, portanto, o nível de confiança necessário é de 90,55645%.
 
 #### d) Construa um intervalo de confiança de 90% para o desvio padrão.
 
@@ -304,11 +295,11 @@ q2_1 <- qchisq((1 - c) / 2, df = gl)
 q2_2 <- qchisq(1 - (1 - c) / 2, df = gl)
 
 # Intervalo de confiança para o desvio padrão
-intervalo <- sqrt(((n - 1) * var(inflacao)) / c(q2_2, q2_1))
+intervalo <- (n - 1) * s^2 / c(q2_2, q2_1)
 intervalo
 ```
 
-Portanto, o intervalo de confiaça de 99% para média da amostra da inflação é \[1.850952, 4.175218\].
+Portanto, o intervalo de confiaça de 99% para média da amostra da inflação é \[3.426025 17.432443\].
 
 #### e) Agora, teste a normalidade para toda a série histórica desde o início do regime de metas. Ou seja, utilize os dados de inflação efetiva de 1999 até 2022. Qual a conclusão?
 
@@ -318,17 +309,16 @@ length(inflacao)
 ```
 
 Como a amostra tem menos de 30 observações, será utilizado o teste de Shapiro-Wilk.
-
 ```{r}
 shapiro.test(inflacao)
 ```
-
-Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados da inflação seguem a distrição normal. É possível chegar na mesma conclusão aplicando-se os testes de Anderson-Darling e Kolmogorov-Smirnov.
-
+Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados da inflação para os anos de 1999 até 2022 seguem a distrição normal. É possível chegar na mesma conclusão aplicando-se os testes de Anderson-Darling e Kolmogorov-Smirnov.
 ```{r warning=FALSE}
 ad.test(inflacao)
 ks.test(scale(inflacao), "pnorm", 0, 1)
+lillie.test(inflacao)
 ```
+Entretanto, pelo teste de Lilliefors (p-value = 0.01631), rejeita-se a hipótese de que os dados da inflação para os anos de 1999 até 2022 seguem a distrição normal, com 5% de significância.
 
 ### 4. Identificação de distribuição
 
@@ -342,11 +332,14 @@ id_dist <- function (dados) {
   descdist(dados, discrete = FALSE)
   
   dados_norm <- (dados - min(dados)) / (max(dados) - min(dados))
-  weibull <- fitdist(dados, "weibull")
-  gamma <- fitdist(dados, "gamma")
-  lognormal <- fitdist(dados, "lnorm")
-  normal <- fitdist(dados, "norm")
+  weibull <- fitdist(dados, "weibull", method="mle")
+  gamma <- fitdist(dados, "gamma", method="mle")
+  lognormal <- fitdist(dados, "lnorm", method="mle")
+  normal <- fitdist(dados, "norm", method="mle")
   beta <- fitdist(dados_norm, "beta", method = "mme")
+  uniforme <- fitdist(dados, "unif", method = "mle")
+  exponencial <- fitdist(dados, "exp", method = "mle")
+  logistica <- fitdist(dados, "logis", method = "mle")
   summary(dados_norm)
   cat("Weibull: ")
   plot(weibull)
@@ -358,6 +351,12 @@ id_dist <- function (dados) {
   plot(normal)
   cat("Beta: ")
   plot(beta)
+  cat("Unifeorme: ")
+  plot(uniforme)
+  cat("Exponencial: ")
+  plot(exponencial)
+  cat("Logística: ")
+  plot(logistica)
   
   cat(paste("Critério de Informação de Akaike\n"))
   cat(paste("Weibull: ", weibull$aic, "\n"))
@@ -365,13 +364,18 @@ id_dist <- function (dados) {
   cat(paste("Lognormal: ", lognormal$aic, "\n"))
   cat(paste("Normal: ", normal$aic, "\n"))
   cat(paste("Beta: ", beta$aic, "\n"))
+  cat(paste("Uniforme: ", uniforme$aic, "\n"))
+  cat(paste("Exponencial: ", exponencial$aic, "\n"))
+  cat(paste("Logística: ", logistica$aic, "\n"))
 }
 
 id_dist(dados);
-
 ```
-
-A distribuição que melhor ajusta os dados é a **Gamma**.
+A distribuição que apresenta melhor Critério de Informacao de Akaike é a **Gamma**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição **Gamma**, com um nível de significância de 5%.
+```{r}
+fitdist(dados, "gamma", method="mle")
+ks.test(dados, "pgamma", 2.8718513, 0.4555631, exact=FALSE)
+```
 
 **b)**
 ```{r}
