@@ -202,7 +202,7 @@ summary(mle)
 ks.test(dados, "pweibull", shape = 6.513198, scale = 1.918411, exact=FALSE)
 ```
 
-Todos os testes apresentaram p-valores que não justificam rejeitar as respectivas hipóteses nulas. Entretanto, a escolha da função de distribuição que melhor ajusta os dados é a Weibull, pois além de apresentar p-valor = 0.9624, é a que obteve melhor Critério de Informacao de Akaike.
+Todos os testes apresentaram p-valores que não justificam rejeitar as respectivas hipóteses nulas (que os dados seguem as distribuições Gamma, Normal e Weibull, respectivamente), com um nível de significância de 5%. Entretanto, a escolha da função de distribuição que melhor ajusta os dados é a Weibull, pois além de apresentar p-valor = 0.9624, é a que obteve melhor Critério de Informacao de Akaike.
 
 #### c) Plotar a função e o histograma para distribuição escolhida.
 
@@ -217,7 +217,7 @@ lines(x = density(w_2_1))
 ```{r}
 w <- function(x, alpha = 6.513198, beta = 1.918411) {(alpha/(beta^alpha))*(x^(alpha-1))*(exp(-(x/beta)^alpha))}
 x <- seq(0, 5, by = .01)
-area <- integrate(w, 0, 1000)
+area <- integrate(w, 0, Inf)
 area
 ```
 
@@ -228,14 +228,11 @@ a1 <- pweibull(1, shape = 6.513198, scale = 1.918411)
 a2 <- pweibull(1.5, shape = 6.513198, scale = 1.918411)
 probabilidade <- a2 - a1
 probabilidade
-```
-
-```{r}
 q1 <- qweibull(a1, shape = 6.513198, scale = 1.918411)
 q2 <- qweibull(a2, shape = 6.513198, scale = 1.918411)
-x = c(a1, seq(q1, q2, l=100), a2)
+x = c(q1, seq(q1, q2, l=100), q2)
 y = c(0, w(seq(q1, q2, l=100)), 0)
-plot(w, 0, 5)
+plot(w, 0, 4)
 polygon(x = x, y = y, col="gray")
 ```
 
