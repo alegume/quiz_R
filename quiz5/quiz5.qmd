@@ -207,7 +207,7 @@ Todos os testes apresentaram p-valores que não justificam rejeitar as respectiv
 #### c) Plotar a função e o histograma para distribuição escolhida.
 
 ```{r warning=FALSE}
-w_2_1 <- rweibull(2000, shape = 6.513198, scale = 1.918411)
+w_2_1 <- rweibull(1500, shape = 6.513198, scale = 1.918411)
 hist(w_2_1, lwd = 1, ylab = "f(x)", xlab = "", freq = F, main = "")
 lines(x = density(w_2_1))
 ```
@@ -351,7 +351,7 @@ id_dist <- function (dados) {
   plot(normal)
   cat("Beta: ")
   plot(beta)
-  cat("Unifeorme: ")
+  cat("Uniforme: ")
   plot(uniforme)
   cat("Exponencial: ")
   plot(exponencial)
@@ -383,32 +383,42 @@ dados <- c(1.4940354, 2.0164275, 1.9513521, 1.5298282, 0.6815670, 2.4267801, 0.6
 id_dist(dados);
 
 ```
-
-A distribuição que melhor ajusta os dados é a **Gamma**.
+A distribuição que apresenta melhor Critério de Informacao de Akaike é a **Gamma**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que estes dados também seguem a distrbuição **Gamma**, com um nível de significância de 5%.
+```{r}
+fitdist(dados, "gamma", method="mle")
+ks.test(dados, "pgamma", 4.697015, 2.448444, exact=FALSE)
+```
 
 **c)**  
 ```{r}
 dados <- c(9.534149, 12.878719, 35.635908, 39.158389, 10.091099, 133.714299, 15.684000, 3.179206, 16.073085, 57.767201, 29.543033, 24.672685, 11.955565, 2.132028, 17.455254, 20.569096, 6.293823, 22.717485, 83.353863, 18.544482, 66.437399, 4.616951, 18.931367, 1.464430, 21.180916, 179.315876, 24.941790, 14.105447, 7.680880,17.688369)
 id_dist(dados);
-
 ```
 
-A distribuição que melhor ajusta os dados é a **Lognormal**.
+A distribuição que apresenta melhor Critério de Informacao de Akaike é a **Lognormal**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição **Lognormal**, com um nível de significância de 5%.
+```{r}
+fitdist(dados, "lnorm", method="mle")
+ks.test(dados, "plnorm", 2.869537, 1.079718, exact=FALSE)
+```
 
 **d)**  
 ```{r}
 dados <- c(4.391658, 5.364267, 10.707930, 5.431008, 6.904122, 6.960462, 12.741468, 8.094473, 7.255829, 8.434530, 9.747057, 6.440681, 7.623020, 9.276933, 8.711818, 5.250229, 6.482474, 3.478216, 9.717008, 9.317296, 9.011653, 11.758927, 10.844472, 9.644711, 7.541715, 7.561009, 10.034726, 9.654606, 6.222452, 5.207637)
 id_dist(dados);
-
 ```
-
-A distribuição que melhor ajusta os dados é a **Weibull**.
+A distribuição que apresenta melhor Critério de Informacao de Akaike é a **Weibull**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição **Weibull**, com um nível de significância de 5%.
+```{r}
+fitdist(dados, "weibull", method="mle")
+ks.test(dados, "pweibull", 4.057284, 8.819386, exact=FALSE)
+```
 
 **e)**  
 ```{r}
 dados <- c(3.816942, 4.123619, 4.575150, 3.214129, 4.854917, 3.647232, 4.003734, 3.261923)
 id_dist(dados);
-
 ```
-
-A distribuição que melhor ajusta os dados é a **Lognormal**.
+A distribuição que apresenta melhor Critério de Informacao de Akaike é a **Uniforme**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição **Uniforme**, com um nível de significância de 5%.
+```{r}
+fitdist(dados, "unif", method="mle")
+ks.test(dados, "punif", 3.214129, 4.854917, exact=FALSE)
+```

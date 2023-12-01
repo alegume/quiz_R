@@ -413,7 +413,7 @@ alternative hypothesis: two-sided</code></pre>
 <section id="c-plotar-a-função-e-o-histograma-para-distribuição-escolhida." class="level4">
 <h4 class="anchored" data-anchor-id="c-plotar-a-função-e-o-histograma-para-distribuição-escolhida.">c) Plotar a função e o histograma para distribuição escolhida.</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>w_2_1 <span class="ot">&lt;-</span> <span class="fu">rweibull</span>(<span class="dv">2000</span>, <span class="at">shape =</span> <span class="fl">6.513198</span>, <span class="at">scale =</span> <span class="fl">1.918411</span>)</span>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>w_2_1 <span class="ot">&lt;-</span> <span class="fu">rweibull</span>(<span class="dv">1500</span>, <span class="at">shape =</span> <span class="fl">6.513198</span>, <span class="at">scale =</span> <span class="fl">1.918411</span>)</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(w_2_1, <span class="at">lwd =</span> <span class="dv">1</span>, <span class="at">ylab =</span> <span class="st">"f(x)"</span>, <span class="at">xlab =</span> <span class="st">""</span>, <span class="at">freq =</span> F, <span class="at">main =</span> <span class="st">""</span>)</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x =</span> <span class="fu">density</span>(w_2_1))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -639,7 +639,7 @@ D = 0.19749, p-value = 0.01631</code></pre>
 <span id="cb83-23"><a href="#cb83-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(normal)</span>
 <span id="cb83-24"><a href="#cb83-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Beta: "</span>)</span>
 <span id="cb83-25"><a href="#cb83-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(beta)</span>
-<span id="cb83-26"><a href="#cb83-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Unifeorme: "</span>)</span>
+<span id="cb83-26"><a href="#cb83-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Uniforme: "</span>)</span>
 <span id="cb83-27"><a href="#cb83-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(uniforme)</span>
 <span id="cb83-28"><a href="#cb83-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Exponencial: "</span>)</span>
 <span id="cb83-29"><a href="#cb83-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(exponencial)</span>
@@ -692,7 +692,7 @@ D = 0.19749, p-value = 0.01631</code></pre>
 <p><img src="quiz5_files/figure-html/unnamed-chunk-31-6.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Unifeorme: </code></pre>
+<pre><code>Uniforme: </code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="quiz5_files/figure-html/unnamed-chunk-31-7.png" class="img-fluid" width="672"></p>
@@ -723,10 +723,13 @@ Logística:  164.7748413195 </code></pre>
 </div>
 <p>A distribuição que apresenta melhor Critério de Informacao de Akaike é a <strong>Gamma</strong>. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição <strong>Gamma</strong>, com um nível de significância de 5%.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>gamma<span class="sc">$</span>estimate</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   shape     rate 
-20.98456 11.73920 </code></pre>
+<pre><code>Fitting of the distribution ' gamma ' by maximum likelihood 
+Parameters:
+       estimate Std. Error
+shape 2.8718513  0.7027011
+rate  0.4555631  0.1217956</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pgamma"</span>, <span class="fl">2.8718513</span>, <span class="fl">0.4555631</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -776,7 +779,7 @@ alternative hypothesis: two-sided</code></pre>
 <p><img src="quiz5_files/figure-html/unnamed-chunk-33-6.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Unifeorme: </code></pre>
+<pre><code>Uniforme: </code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="quiz5_files/figure-html/unnamed-chunk-33-7.png" class="img-fluid" width="672"></p>
@@ -805,79 +808,30 @@ Exponencial:  101.089198302578
 Logística:  80.2541161161851 </code></pre>
 </div>
 </div>
-<p>A distribuição que melhor ajusta os dados é a <strong>Gamma</strong>.</p>
+<p>A distribuição que apresenta melhor Critério de Informacao de Akaike é a <strong>Gamma</strong>. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que estes dados também seguem a distrbuição <strong>Gamma</strong>, com um nível de significância de 5%.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting of the distribution ' gamma ' by maximum likelihood 
+Parameters:
+      estimate Std. Error
+shape 4.697015  1.1722338
+rate  2.448444  0.6449308</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pgamma"</span>, <span class="fl">2.8718513</span>, <span class="fl">0.4555631</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-sample Kolmogorov-Smirnov test
+
+data:  dados
+D = 0.76687, p-value = 9.992e-16
+alternative hypothesis: two-sided</code></pre>
+</div>
+</div>
 <p><strong>c)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">9.534149</span>, <span class="fl">12.878719</span>, <span class="fl">35.635908</span>, <span class="fl">39.158389</span>, <span class="fl">10.091099</span>, <span class="fl">133.714299</span>, <span class="fl">15.684000</span>, <span class="fl">3.179206</span>, <span class="fl">16.073085</span>, <span class="fl">57.767201</span>, <span class="fl">29.543033</span>, <span class="fl">24.672685</span>, <span class="fl">11.955565</span>, <span class="fl">2.132028</span>, <span class="fl">17.455254</span>, <span class="fl">20.569096</span>, <span class="fl">6.293823</span>, <span class="fl">22.717485</span>, <span class="fl">83.353863</span>, <span class="fl">18.544482</span>, <span class="fl">66.437399</span>, <span class="fl">4.616951</span>, <span class="fl">18.931367</span>, <span class="fl">1.464430</span>, <span class="fl">21.180916</span>, <span class="fl">179.315876</span>, <span class="fl">24.941790</span>, <span class="fl">14.105447</span>, <span class="fl">7.680880</span>,<span class="fl">17.688369</span>)</span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Weibull: </code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-34-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Gamma: </code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-34-3.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Lognormal: </code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-34-4.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Normal: </code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-34-5.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Beta: </code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-34-6.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Unifeorme: </code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-34-7.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Exponencial: </code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-34-8.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Logística: </code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-34-9.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Critério de Informação de Akaike
-Weibull:  269.726392071423 
-Gamma:  269.854267184135 
-Lognormal:  265.910553623527 
-Normal:  308.549444866565 
-Beta:  NaN 
-Uniforme:  314.856917728505 
-Exponencial:  267.86587199743 
-Logística:  297.626998043809 </code></pre>
-</div>
-</div>
-<p>A distribuição que melhor ajusta os dados é a <strong>Lognormal</strong>.</p>
-<p><strong>d)</strong></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.391658</span>, <span class="fl">5.364267</span>, <span class="fl">10.707930</span>, <span class="fl">5.431008</span>, <span class="fl">6.904122</span>, <span class="fl">6.960462</span>, <span class="fl">12.741468</span>, <span class="fl">8.094473</span>, <span class="fl">7.255829</span>, <span class="fl">8.434530</span>, <span class="fl">9.747057</span>, <span class="fl">6.440681</span>, <span class="fl">7.623020</span>, <span class="fl">9.276933</span>, <span class="fl">8.711818</span>, <span class="fl">5.250229</span>, <span class="fl">6.482474</span>, <span class="fl">3.478216</span>, <span class="fl">9.717008</span>, <span class="fl">9.317296</span>, <span class="fl">9.011653</span>, <span class="fl">11.758927</span>, <span class="fl">10.844472</span>, <span class="fl">9.644711</span>, <span class="fl">7.541715</span>, <span class="fl">7.561009</span>, <span class="fl">10.034726</span>, <span class="fl">9.654606</span>, <span class="fl">6.222452</span>, <span class="fl">5.207637</span>)</span>
-<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">9.534149</span>, <span class="fl">12.878719</span>, <span class="fl">35.635908</span>, <span class="fl">39.158389</span>, <span class="fl">10.091099</span>, <span class="fl">133.714299</span>, <span class="fl">15.684000</span>, <span class="fl">3.179206</span>, <span class="fl">16.073085</span>, <span class="fl">57.767201</span>, <span class="fl">29.543033</span>, <span class="fl">24.672685</span>, <span class="fl">11.955565</span>, <span class="fl">2.132028</span>, <span class="fl">17.455254</span>, <span class="fl">20.569096</span>, <span class="fl">6.293823</span>, <span class="fl">22.717485</span>, <span class="fl">83.353863</span>, <span class="fl">18.544482</span>, <span class="fl">66.437399</span>, <span class="fl">4.616951</span>, <span class="fl">18.931367</span>, <span class="fl">1.464430</span>, <span class="fl">21.180916</span>, <span class="fl">179.315876</span>, <span class="fl">24.941790</span>, <span class="fl">14.105447</span>, <span class="fl">7.680880</span>,<span class="fl">17.688369</span>)</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="quiz5_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -912,7 +866,7 @@ Logística:  297.626998043809 </code></pre>
 <p><img src="quiz5_files/figure-html/unnamed-chunk-35-6.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Unifeorme: </code></pre>
+<pre><code>Uniforme: </code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="quiz5_files/figure-html/unnamed-chunk-35-7.png" class="img-fluid" width="672"></p>
@@ -931,6 +885,93 @@ Logística:  297.626998043809 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Critério de Informação de Akaike
+Weibull:  269.726392071423 
+Gamma:  269.854267184135 
+Lognormal:  265.910553623527 
+Normal:  308.549444866565 
+Beta:  NaN 
+Uniforme:  314.856917728505 
+Exponencial:  267.86587199743 
+Logística:  297.626998043809 </code></pre>
+</div>
+</div>
+<p>A distribuição que apresenta melhor Critério de Informacao de Akaike é a <strong>Lognormal</strong>. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição <strong>Lognormal</strong>, com um nível de significância de 5%.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting of the distribution ' gamma ' by maximum likelihood 
+Parameters:
+        estimate Std. Error
+shape 1.02495731 0.23329809
+rate  0.03316271 0.00961805</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pgamma"</span>, <span class="fl">2.8718513</span>, <span class="fl">0.4555631</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-sample Kolmogorov-Smirnov test
+
+data:  dados
+D = 0.65265, p-value = 1.591e-11
+alternative hypothesis: two-sided</code></pre>
+</div>
+</div>
+<p><strong>d)</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.391658</span>, <span class="fl">5.364267</span>, <span class="fl">10.707930</span>, <span class="fl">5.431008</span>, <span class="fl">6.904122</span>, <span class="fl">6.960462</span>, <span class="fl">12.741468</span>, <span class="fl">8.094473</span>, <span class="fl">7.255829</span>, <span class="fl">8.434530</span>, <span class="fl">9.747057</span>, <span class="fl">6.440681</span>, <span class="fl">7.623020</span>, <span class="fl">9.276933</span>, <span class="fl">8.711818</span>, <span class="fl">5.250229</span>, <span class="fl">6.482474</span>, <span class="fl">3.478216</span>, <span class="fl">9.717008</span>, <span class="fl">9.317296</span>, <span class="fl">9.011653</span>, <span class="fl">11.758927</span>, <span class="fl">10.844472</span>, <span class="fl">9.644711</span>, <span class="fl">7.541715</span>, <span class="fl">7.561009</span>, <span class="fl">10.034726</span>, <span class="fl">9.654606</span>, <span class="fl">6.222452</span>, <span class="fl">5.207637</span>)</span>
+<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Weibull: </code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-37-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Gamma: </code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-37-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Lognormal: </code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-37-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Normal: </code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-37-5.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Beta: </code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-37-6.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Uniforme: </code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-37-7.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Exponencial: </code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-37-8.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Logística: </code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="quiz5_files/figure-html/unnamed-chunk-37-9.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Critério de Informação de Akaike
 Weibull:  136.371061137677 
 Gamma:  137.524488802914 
 Lognormal:  139.025879465118 
@@ -944,58 +985,58 @@ Logística:  138.263602150104 </code></pre>
 <p>A distribuição que melhor ajusta os dados é a <strong>Weibull</strong>.</p>
 <p><strong>e)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.816942</span>, <span class="fl">4.123619</span>, <span class="fl">4.575150</span>, <span class="fl">3.214129</span>, <span class="fl">4.854917</span>, <span class="fl">3.647232</span>, <span class="fl">4.003734</span>, <span class="fl">3.261923</span>)</span>
-<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.816942</span>, <span class="fl">4.123619</span>, <span class="fl">4.575150</span>, <span class="fl">3.214129</span>, <span class="fl">4.854917</span>, <span class="fl">3.647232</span>, <span class="fl">4.003734</span>, <span class="fl">3.261923</span>)</span>
+<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Weibull: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-36-2.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-38-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gamma: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-36-3.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-38-3.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Lognormal: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-36-4.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-38-4.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Normal: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-36-5.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-38-5.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Beta: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-36-6.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-38-6.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Unifeorme: </code></pre>
+<pre><code>Uniforme: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-36-7.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-38-7.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Exponencial: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-36-8.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-38-8.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Logística: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-36-9.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-38-9.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Critério de Informação de Akaike
