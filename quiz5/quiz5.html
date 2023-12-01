@@ -158,7 +158,7 @@ D = 0.1167, p-value = 0.08619</code></pre>
 </div>
 </div>
 <p><strong>Interpretação dos resultados:</strong></p>
-<p>Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados seguem a distrição normal, pois os p-valores são maiores do que 0,05 para todos os testes de normalidades.</p>
+<p>Considerando um nível de significância de 5%, não se rejeita a hipótese de que os dados amostrais seguem a distrição normal, pois os p-valores são maiores do que 0,05 para todos os testes de normalidade realizados anteriormente.</p>
 <hr>
 </section>
 <section id="b-probabilidade-de-que-uma-chamada-demore-entre-125-e-150-segundos." class="level4">
@@ -202,7 +202,7 @@ D = 0.1167, p-value = 0.08619</code></pre>
 <p><img src="quiz5_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>** A probabilidade de que uma chamada demore menos de 125 segundos é de 4,824296%.**</p>
+<p><strong>A probabilidade de que uma chamada demore menos de 125 segundos é de 4,824296%.</strong></p>
 </section>
 <section id="d-probabilidade-de-que-uma-chamada-demore-entre-145-e-155-segundos." class="level4">
 <h4 class="anchored" data-anchor-id="d-probabilidade-de-que-uma-chamada-demore-entre-145-e-155-segundos.">d) Probabilidade de que uma chamada demore entre 145 e 155 segundos.</h4>
@@ -305,17 +305,17 @@ estimated kurtosis:  5.391445 </code></pre>
 <p><img src="quiz5_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>O Critério de Informacao de Akaike (AIC) confirma que <strong>a distribuição Weibull</strong> é a que melhor se ajusta aos dados.</p>
+<p>O Critério de Informação de Akaike (AIC) confirma que <strong>a distribuição Weibull</strong> é a que melhor se ajusta aos dados. Seguem os valores:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Weibull: "</span>, weibull<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">Gamma: "</span>, gamma<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">Lognormal: "</span>, lognormal<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">Normal: "</span>, normal<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">Beta: "</span>, beta<span class="sc">$</span>aic))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Weibull: "</span>, weibull<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">Gamma: "</span>, gamma<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">Lognormal: "</span>, lognormal<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">Normal: "</span>, normal<span class="sc">$</span>aic))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Weibull:  21.9771768698319 
 Gamma:  31.7072545492645 
 Lognormal:  36.1032950711012 
-Normal:  25.110725948175 
-Beta:  Inf</code></pre>
+Normal:  25.110725948175</code></pre>
 </div>
 </div>
+<p>Ajuste de distribuição e teste de Kolmogorov-Smirnov:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"weibull"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>mle<span class="sc">$</span>estimate</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -339,18 +339,13 @@ alternative hypothesis: two-sided</code></pre>
 <h4 class="anchored" data-anchor-id="b-compare-os-resultados-gerados-pelo-teste-de-kolmogorov-smirnov-considerando-as-distribuições-gama-lognormal-e-weibull.">b) Compare os resultados gerados pelo teste de Kolmogorov-Smirnov considerando as distribuições Gama, Lognormal e Weibull.</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mle)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>mle</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting of the distribution ' gamma ' by maximum likelihood 
-Parameters : 
+Parameters:
       estimate Std. Error
 shape 20.98456   5.375681
-rate  11.73920   3.043447
-Loglikelihood:  -13.85363   AIC:  31.70725   BIC:  34.50965 
-Correlation matrix:
-          shape      rate
-shape 1.0000000 0.9881127
-rate  0.9881127 1.0000000</code></pre>
+rate  11.73920   3.043447</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pgamma"</span>, <span class="fl">20.98456</span>, <span class="fl">11.73920</span>, <span class="at">exact =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -362,18 +357,13 @@ D = 0.14176, p-value = 0.5829
 alternative hypothesis: two-sided</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"lnorm"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mle)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>mle</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting of the distribution ' lnorm ' by maximum likelihood 
-Parameters : 
+Parameters:
          estimate Std. Error
 meanlog 0.5568348 0.04322583
-sdlog   0.2367576 0.03056282
-Loglikelihood:  -16.05165   AIC:  36.1033   BIC:  38.90569 
-Correlation matrix:
-        meanlog sdlog
-meanlog       1     0
-sdlog         0     1</code></pre>
+sdlog   0.2367576 0.03056282</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"plnorm"</span>, <span class="at">meanlog=</span><span class="fl">0.5568348</span>, <span class="at">sdlog=</span><span class="fl">0.2367576</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -385,18 +375,13 @@ D = 0.15513, p-value = 0.4658
 alternative hypothesis: two-sided</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>mle <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"weibull"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mle)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>mle</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting of the distribution ' weibull ' by maximum likelihood 
-Parameters : 
+Parameters:
       estimate Std. Error
 shape 6.513198 0.94665004
-scale 1.918411 0.05622354
-Loglikelihood:  -8.988588   AIC:  21.97718   BIC:  24.77957 
-Correlation matrix:
-          shape     scale
-shape 1.0000000 0.2919704
-scale 0.2919704 1.0000000</code></pre>
+scale 1.918411 0.05622354</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pweibull"</span>, <span class="at">shape =</span> <span class="fl">6.513198</span>, <span class="at">scale =</span> <span class="fl">1.918411</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -408,7 +393,7 @@ D = 0.091733, p-value = 0.9624
 alternative hypothesis: two-sided</code></pre>
 </div>
 </div>
-<p>Todos os testes apresentaram p-valores que não justificam rejeitar as respectivas hipóteses nulas (que os dados seguem as distribuições Gamma, Normal e Weibull, respectivamente), com um nível de significância de 5%. Entretanto, a escolha da função de distribuição que melhor ajusta os dados é a Weibull, pois além de apresentar p-valor = 0.9624, é a que obteve melhor Critério de Informacao de Akaike.</p>
+<p>Todos os testes apresentaram p-valores que não justificam rejeitar as respectivas hipóteses nulas (que os dados seguem as distribuições Gamma, Normal e Weibull, respectivamente), com um nível de significância de 5%. Entretanto, a escolha da função de distribuição que melhor ajusta os dados é a Weibull, pois além de apresentar p-valor = 0.9624, é a que obteve melhor (menor) Critério de Informação de Akaike.</p>
 </section>
 <section id="c-plotar-a-função-e-o-histograma-para-distribuição-escolhida." class="level4">
 <h4 class="anchored" data-anchor-id="c-plotar-a-função-e-o-histograma-para-distribuição-escolhida.">c) Plotar a função e o histograma para distribuição escolhida.</h4>
@@ -481,7 +466,7 @@ data:  inflacao
 D = 0.24609, p-value = 0.08736</code></pre>
 </div>
 </div>
-<p>Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados amostrais de inflação seguem a distrição normal, considerando que ambos p-valores são maiores do que 0,05.</p>
+<p>Considerando um nível de significância de 5%, não se rejeita a hipótese de que os dados amostrais de inflação seguem a distrição normal, considerando que ambos p-valores são maiores do que 0,05.</p>
 </section>
 <section id="b-usando-esses-dados-construa-um-intervalo-de-confiança-de-99-para-a-média-da-inflação." class="level4">
 <h4 class="anchored" data-anchor-id="b-usando-esses-dados-construa-um-intervalo-de-confiança-de-99-para-a-média-da-inflação.">b) Usando esses dados, construa um intervalo de confiança de 99% para a média da inflação.</h4>
@@ -508,13 +493,9 @@ mean of x
 <span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">qt</span>(alpha<span class="sc">/</span><span class="dv">2</span>, gl, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>LI <span class="ot">&lt;-</span> x_bar <span class="sc">-</span> t<span class="sc">*</span>(s<span class="sc">/</span>(n<span class="sc">^</span><span class="fl">0.5</span>))</span>
 <span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>LS <span class="ot">&lt;-</span> x_bar <span class="sc">+</span> t<span class="sc">*</span>(s<span class="sc">/</span>(n<span class="sc">^</span><span class="fl">0.5</span>))</span>
-<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> (LI, LS)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">"["</span>, LI, <span class="st">", "</span>, LS, <span class="st">"]"</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>3.457911 8.674089</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>LS <span class="sc">-</span> LI</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.216179</code></pre>
+<pre><code>[3.45791074446933, 8.67408925553067]</code></pre>
 </div>
 </div>
 <p>Portanto, pode-se afirmar com nível de confiaça de 99% que a média da inflação estará no intervalo [3.457911, 8.674089].</p>
@@ -522,21 +503,21 @@ mean of x
 <section id="c-os-especialistas-têm-a-opinião-de-que-o-intervalo-calculado-para-a-média-é-muito-amplo-e-querem-um-intervalo-de-comprimento-total-igual-a-3.-encontre-o-nível-de-confiança-para-esse-novo-intervalo." class="level4">
 <h4 class="anchored" data-anchor-id="c-os-especialistas-têm-a-opinião-de-que-o-intervalo-calculado-para-a-média-é-muito-amplo-e-querem-um-intervalo-de-comprimento-total-igual-a-3.-encontre-o-nível-de-confiança-para-esse-novo-intervalo.">c) Os especialistas têm a opinião de que o intervalo calculado para a média é muito amplo e querem um intervalo de comprimento total igual a 3. Encontre o nível de confiança para esse novo intervalo.</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcule o valor de t</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> ((<span class="dv">3</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(n)) <span class="sc">/</span> s</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>LI <span class="ot">&lt;-</span> x_bar <span class="sc">-</span> t<span class="sc">*</span>(s<span class="sc">/</span>(n<span class="sc">^</span><span class="fl">0.5</span>))</span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>LS <span class="ot">&lt;-</span> x_bar <span class="sc">+</span> t<span class="sc">*</span>(s<span class="sc">/</span>(n<span class="sc">^</span><span class="fl">0.5</span>))</span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Intervalo: ["</span>, LI, <span class="st">", "</span> , LS, <span class="st">"]"</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcule o valor de t</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> ((<span class="dv">3</span><span class="sc">/</span><span class="dv">2</span>) <span class="sc">*</span> <span class="fu">sqrt</span>(n)) <span class="sc">/</span> s</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>LI <span class="ot">&lt;-</span> x_bar <span class="sc">-</span> t<span class="sc">*</span>(s<span class="sc">/</span>(n<span class="sc">^</span><span class="fl">0.5</span>))</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>LS <span class="ot">&lt;-</span> x_bar <span class="sc">+</span> t<span class="sc">*</span>(s<span class="sc">/</span>(n<span class="sc">^</span><span class="fl">0.5</span>))</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste0</span>(<span class="st">"Intervalo: ["</span>, LI, <span class="st">", "</span> , LS, <span class="st">"]"</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Intervalo: [4.566, 7.566]"</code></pre>
+<pre><code>Intervalo: [4.566, 7.566]</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="fu">pt</span>(t, <span class="at">df =</span> gl, <span class="at">lower.tail=</span><span class="cn">FALSE</span>))</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>alpha</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="fu">pt</span>(t, <span class="at">df =</span> gl, <span class="at">lower.tail=</span><span class="cn">FALSE</span>))</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>alpha</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.09443553</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> alpha</span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>c</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> alpha</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>c</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9055645</code></pre>
 </div>
@@ -546,31 +527,31 @@ mean of x
 <section id="d-construa-um-intervalo-de-confiança-de-90-para-o-desvio-padrão." class="level4">
 <h4 class="anchored" data-anchor-id="d-construa-um-intervalo-de-confiança-de-90-para-o-desvio-padrão.">d) Construa um intervalo de confiança de 90% para o desvio padrão.</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>q2_1 <span class="ot">&lt;-</span> <span class="fu">qchisq</span>((<span class="dv">1</span> <span class="sc">-</span> c) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> gl)</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>q2_2 <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> c) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> gl)</span>
-<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Intervalo de confiança para o desvio padrão</span></span>
-<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>intervalo <span class="ot">&lt;-</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">c</span>(q2_2, q2_1)</span>
-<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>intervalo</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>q2_1 <span class="ot">&lt;-</span> <span class="fu">qchisq</span>((<span class="dv">1</span> <span class="sc">-</span> c) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> gl)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>q2_2 <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> c) <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> gl)</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Intervalo de confiança para o desvio padrão</span></span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>intervalo <span class="ot">&lt;-</span> (n <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="fu">c</span>(q2_2, q2_1)</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>intervalo</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  3.426025 17.432443</code></pre>
 </div>
 </div>
-<p>Portanto, o intervalo de confiaça de 99% para média da amostra da inflação é [3.426025 17.432443].</p>
+<p>Portanto, o intervalo de confiaça de 90% para média da amostra da inflação é [3.426025 17.432443].</p>
 </section>
 <section id="e-agora-teste-a-normalidade-para-toda-a-série-histórica-desde-o-início-do-regime-de-metas.-ou-seja-utilize-os-dados-de-inflação-efetiva-de-1999-até-2022.-qual-a-conclusão" class="level4">
 <h4 class="anchored" data-anchor-id="e-agora-teste-a-normalidade-para-toda-a-série-histórica-desde-o-início-do-regime-de-metas.-ou-seja-utilize-os-dados-de-inflação-efetiva-de-1999-até-2022.-qual-a-conclusão">e) Agora, teste a normalidade para toda a série histórica desde o início do regime de metas. Ou seja, utilize os dados de inflação efetiva de 1999 até 2022. Qual a conclusão?</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>inflacao <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">8.94</span>,<span class="fl">5.97</span>,<span class="fl">7.67</span>,<span class="fl">12.53</span>,<span class="fl">9.3</span>,<span class="fl">7.6</span>,<span class="fl">5.69</span>,<span class="fl">3.14</span>,<span class="fl">4.46</span>,<span class="fl">5.9</span>,<span class="fl">4.31</span>,<span class="fl">5.91</span>,<span class="fl">6.5</span>,<span class="fl">5.84</span>,<span class="fl">5.91</span>,<span class="fl">6.41</span>,<span class="fl">10.67</span>,<span class="fl">6.29</span>,<span class="fl">2.95</span>,<span class="fl">3.75</span>,<span class="fl">4.31</span>,<span class="fl">4.52</span>,<span class="fl">10.06</span>,<span class="fl">5.79</span>)</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(inflacao)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>inflacao <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">8.94</span>,<span class="fl">5.97</span>,<span class="fl">7.67</span>,<span class="fl">12.53</span>,<span class="fl">9.3</span>,<span class="fl">7.6</span>,<span class="fl">5.69</span>,<span class="fl">3.14</span>,<span class="fl">4.46</span>,<span class="fl">5.9</span>,<span class="fl">4.31</span>,<span class="fl">5.91</span>,<span class="fl">6.5</span>,<span class="fl">5.84</span>,<span class="fl">5.91</span>,<span class="fl">6.41</span>,<span class="fl">10.67</span>,<span class="fl">6.29</span>,<span class="fl">2.95</span>,<span class="fl">3.75</span>,<span class="fl">4.31</span>,<span class="fl">4.52</span>,<span class="fl">10.06</span>,<span class="fl">5.79</span>)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(inflacao)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 24</code></pre>
 </div>
 </div>
 <p>Como a amostra tem menos de 30 observações, será utilizado o teste de Shapiro-Wilk.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(inflacao)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(inflacao)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -581,7 +562,7 @@ W = 0.92757, p-value = 0.08602</code></pre>
 </div>
 <p>Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados da inflação para os anos de 1999 até 2022 seguem a distrição normal. É possível chegar na mesma conclusão aplicando-se os testes de Anderson-Darling e Kolmogorov-Smirnov.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ad.test</span>(inflacao)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ad.test</span>(inflacao)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Anderson-Darling normality test
@@ -589,7 +570,7 @@ W = 0.92757, p-value = 0.08602</code></pre>
 data:  inflacao
 A = 0.70952, p-value = 0.05561</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">scale</span>(inflacao), <span class="st">"pnorm"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">scale</span>(inflacao), <span class="st">"pnorm"</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One-sample Kolmogorov-Smirnov test
@@ -598,7 +579,7 @@ data:  scale(inflacao)
 D = 0.19749, p-value = 0.3065
 alternative hypothesis: two-sided</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lillie.test</span>(inflacao)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lillie.test</span>(inflacao)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Lilliefors (Kolmogorov-Smirnov) normality test
@@ -607,57 +588,57 @@ data:  inflacao
 D = 0.19749, p-value = 0.01631</code></pre>
 </div>
 </div>
-<p>Entretanto, pelo teste de Lilliefors (p-value = 0.01631), rejeita-se a hipótese de que os dados da inflação para os anos de 1999 até 2022 seguem a distrição normal, com 5% de significância.</p>
+<p>Entretanto, pelo teste de Lilliefors (p-value = 0.01631), rejeita-se a hipótese de que os dados da inflação para os anos de 1999 até 2022 seguem a distrição normal, com nível de 5% significância.</p>
 </section>
 <section id="identificação-de-distribuição-1" class="level3">
 <h3 class="anchored" data-anchor-id="identificação-de-distribuição-1">4. Identificação de distribuição</h3>
 <p>Identifique a distribuição de cada um dos conjuntos de dados mostrado a seguir.</p>
 <p><strong>a)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">20.8625807</span>, <span class="fl">7.2445709</span>, <span class="fl">4.4659396</span>, <span class="fl">3.2712081</span>, <span class="fl">4.9300651</span>, <span class="fl">5.7444213</span>, <span class="fl">6.6700987</span>, <span class="fl">11.1750446</span>, <span class="fl">2.3753017</span>, <span class="fl">3.5425386</span>, <span class="fl">0.5978486</span>, <span class="fl">6.8869953</span>, <span class="fl">6.1102197</span>, <span class="fl">8.2716973</span>, <span class="fl">9.7465462</span>, <span class="fl">3.3991988</span>, <span class="fl">1.8557047</span>, <span class="fl">11.3983705</span>, <span class="fl">3.6847590</span>, <span class="fl">2.3327479</span>, <span class="fl">6.1364329</span>, <span class="fl">4.4686122</span>, <span class="fl">7.8007834</span>, <span class="fl">4.7649257</span>, <span class="fl">3.8829371</span>, <span class="fl">5.9986131</span>, <span class="fl">5.5163819</span>, <span class="fl">9.6951710</span>, <span class="fl">10.1645820</span>, <span class="fl">6.1304865</span>)</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>id_dist <span class="ot">&lt;-</span> <span class="cf">function</span> (dados) {</span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">descdist</span>(dados, <span class="at">discrete =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>  dados_norm <span class="ot">&lt;-</span> (dados <span class="sc">-</span> <span class="fu">min</span>(dados)) <span class="sc">/</span> (<span class="fu">max</span>(dados) <span class="sc">-</span> <span class="fu">min</span>(dados))</span>
-<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a>  weibull <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"weibull"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
-<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a>  gamma <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
-<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a>  lognormal <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"lnorm"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
-<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a>  normal <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"norm"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
-<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados_norm, <span class="st">"beta"</span>, <span class="at">method =</span> <span class="st">"mme"</span>)</span>
-<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a>  uniforme <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"unif"</span>, <span class="at">method =</span> <span class="st">"mle"</span>)</span>
-<span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a>  exponencial <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"exp"</span>, <span class="at">method =</span> <span class="st">"mle"</span>)</span>
-<span id="cb83-14"><a href="#cb83-14" aria-hidden="true" tabindex="-1"></a>  logistica <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"logis"</span>, <span class="at">method =</span> <span class="st">"mle"</span>)</span>
-<span id="cb83-15"><a href="#cb83-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(dados_norm)</span>
-<span id="cb83-16"><a href="#cb83-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Weibull: "</span>)</span>
-<span id="cb83-17"><a href="#cb83-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(weibull)</span>
-<span id="cb83-18"><a href="#cb83-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Gamma: "</span>)</span>
-<span id="cb83-19"><a href="#cb83-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(gamma)</span>
-<span id="cb83-20"><a href="#cb83-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Lognormal: "</span>)</span>
-<span id="cb83-21"><a href="#cb83-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(lognormal)</span>
-<span id="cb83-22"><a href="#cb83-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Normal: "</span>) </span>
-<span id="cb83-23"><a href="#cb83-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(normal)</span>
-<span id="cb83-24"><a href="#cb83-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Beta: "</span>)</span>
-<span id="cb83-25"><a href="#cb83-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(beta)</span>
-<span id="cb83-26"><a href="#cb83-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Uniforme: "</span>)</span>
-<span id="cb83-27"><a href="#cb83-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(uniforme)</span>
-<span id="cb83-28"><a href="#cb83-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Exponencial: "</span>)</span>
-<span id="cb83-29"><a href="#cb83-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(exponencial)</span>
-<span id="cb83-30"><a href="#cb83-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Logística: "</span>)</span>
-<span id="cb83-31"><a href="#cb83-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(logistica)</span>
-<span id="cb83-32"><a href="#cb83-32" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb83-33"><a href="#cb83-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Critério de Informação de Akaike</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb83-34"><a href="#cb83-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Weibull: "</span>, weibull<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb83-35"><a href="#cb83-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Gamma: "</span>, gamma<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb83-36"><a href="#cb83-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Lognormal: "</span>, lognormal<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb83-37"><a href="#cb83-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Normal: "</span>, normal<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb83-38"><a href="#cb83-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Beta: "</span>, beta<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb83-39"><a href="#cb83-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Uniforme: "</span>, uniforme<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb83-40"><a href="#cb83-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Exponencial: "</span>, exponencial<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb83-41"><a href="#cb83-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Logística: "</span>, logistica<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb83-42"><a href="#cb83-42" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb83-43"><a href="#cb83-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-44"><a href="#cb83-44" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">20.8625807</span>, <span class="fl">7.2445709</span>, <span class="fl">4.4659396</span>, <span class="fl">3.2712081</span>, <span class="fl">4.9300651</span>, <span class="fl">5.7444213</span>, <span class="fl">6.6700987</span>, <span class="fl">11.1750446</span>, <span class="fl">2.3753017</span>, <span class="fl">3.5425386</span>, <span class="fl">0.5978486</span>, <span class="fl">6.8869953</span>, <span class="fl">6.1102197</span>, <span class="fl">8.2716973</span>, <span class="fl">9.7465462</span>, <span class="fl">3.3991988</span>, <span class="fl">1.8557047</span>, <span class="fl">11.3983705</span>, <span class="fl">3.6847590</span>, <span class="fl">2.3327479</span>, <span class="fl">6.1364329</span>, <span class="fl">4.4686122</span>, <span class="fl">7.8007834</span>, <span class="fl">4.7649257</span>, <span class="fl">3.8829371</span>, <span class="fl">5.9986131</span>, <span class="fl">5.5163819</span>, <span class="fl">9.6951710</span>, <span class="fl">10.1645820</span>, <span class="fl">6.1304865</span>)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>id_dist <span class="ot">&lt;-</span> <span class="cf">function</span> (dados) {</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">descdist</span>(dados, <span class="at">discrete =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>  dados_norm <span class="ot">&lt;-</span> (dados <span class="sc">-</span> <span class="fu">min</span>(dados)) <span class="sc">/</span> (<span class="fu">max</span>(dados) <span class="sc">-</span> <span class="fu">min</span>(dados))</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>  weibull <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"weibull"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>  gamma <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a>  lognormal <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"lnorm"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>  normal <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"norm"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span>
+<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados_norm, <span class="st">"beta"</span>, <span class="at">method =</span> <span class="st">"mme"</span>)</span>
+<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>  uniforme <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"unif"</span>, <span class="at">method =</span> <span class="st">"mle"</span>)</span>
+<span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a>  exponencial <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"exp"</span>, <span class="at">method =</span> <span class="st">"mle"</span>)</span>
+<span id="cb81-14"><a href="#cb81-14" aria-hidden="true" tabindex="-1"></a>  logistica <span class="ot">&lt;-</span> <span class="fu">fitdist</span>(dados, <span class="st">"logis"</span>, <span class="at">method =</span> <span class="st">"mle"</span>)</span>
+<span id="cb81-15"><a href="#cb81-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(dados_norm)</span>
+<span id="cb81-16"><a href="#cb81-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Weibull: "</span>)</span>
+<span id="cb81-17"><a href="#cb81-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(weibull)</span>
+<span id="cb81-18"><a href="#cb81-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Gamma: "</span>)</span>
+<span id="cb81-19"><a href="#cb81-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(gamma)</span>
+<span id="cb81-20"><a href="#cb81-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Lognormal: "</span>)</span>
+<span id="cb81-21"><a href="#cb81-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(lognormal)</span>
+<span id="cb81-22"><a href="#cb81-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Normal: "</span>) </span>
+<span id="cb81-23"><a href="#cb81-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(normal)</span>
+<span id="cb81-24"><a href="#cb81-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Beta: "</span>)</span>
+<span id="cb81-25"><a href="#cb81-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(beta)</span>
+<span id="cb81-26"><a href="#cb81-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Uniforme: "</span>)</span>
+<span id="cb81-27"><a href="#cb81-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(uniforme)</span>
+<span id="cb81-28"><a href="#cb81-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Exponencial: "</span>)</span>
+<span id="cb81-29"><a href="#cb81-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(exponencial)</span>
+<span id="cb81-30"><a href="#cb81-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Logística: "</span>)</span>
+<span id="cb81-31"><a href="#cb81-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(logistica)</span>
+<span id="cb81-32"><a href="#cb81-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb81-33"><a href="#cb81-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Critério de Informação de Akaike</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb81-34"><a href="#cb81-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Weibull: "</span>, weibull<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb81-35"><a href="#cb81-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Gamma: "</span>, gamma<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb81-36"><a href="#cb81-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Lognormal: "</span>, lognormal<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb81-37"><a href="#cb81-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Normal: "</span>, normal<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb81-38"><a href="#cb81-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Beta: "</span>, beta<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb81-39"><a href="#cb81-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Uniforme: "</span>, uniforme<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb81-40"><a href="#cb81-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Exponencial: "</span>, exponencial<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb81-41"><a href="#cb81-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Logística: "</span>, logistica<span class="sc">$</span>aic, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb81-42"><a href="#cb81-42" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb81-43"><a href="#cb81-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-44"><a href="#cb81-44" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="quiz5_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -721,9 +702,9 @@ Exponencial:  172.47257861511
 Logística:  164.7748413195 </code></pre>
 </div>
 </div>
-<p>A distribuição que apresenta melhor Critério de Informacao de Akaike é a <strong>Gamma</strong>. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição <strong>Gamma</strong>, com um nível de significância de 5%.</p>
+<p>A distribuição que apresenta menor Critério de Informação de Akaike é a <strong>Gamma</strong>. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distribuição <strong>Gamma</strong>, com um nível de significância de 5%.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting of the distribution ' gamma ' by maximum likelihood 
 Parameters:
@@ -731,7 +712,7 @@ Parameters:
 shape 2.8718513  0.7027011
 rate  0.4555631  0.1217956</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pgamma"</span>, <span class="fl">2.8718513</span>, <span class="fl">0.4555631</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pgamma"</span>, <span class="fl">2.8718513</span>, <span class="fl">0.4555631</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One-sample Kolmogorov-Smirnov test
@@ -743,8 +724,8 @@ alternative hypothesis: two-sided</code></pre>
 </div>
 <p><strong>b)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.4940354</span>, <span class="fl">2.0164275</span>, <span class="fl">1.9513521</span>, <span class="fl">1.5298282</span>, <span class="fl">0.6815670</span>, <span class="fl">2.4267801</span>, <span class="fl">0.6762800</span>, <span class="fl">1.7018986</span>, <span class="fl">4.1632638</span>, <span class="fl">2.5472784</span>, <span class="fl">2.2174151</span>, <span class="fl">0.6058986</span>, <span class="fl">1.7432601</span>, <span class="fl">1.1199216</span>, <span class="fl">1.7135932</span>, <span class="fl">2.8758657</span>, <span class="fl">0.8537880</span>, <span class="fl">1.5511504</span>, <span class="fl">2.3262178</span>, <span class="fl">2.3267933</span>, <span class="fl">1.3916375</span>, <span class="fl">4.7439947</span>, <span class="fl">2.1864812</span>, <span class="fl">2.0269031</span>,<span class="fl">1.7489244</span>, <span class="fl">1.8191036</span>, <span class="fl">2.0845146</span>, <span class="fl">1.2229195</span>, <span class="fl">1.0115042</span>, <span class="fl">2.7931222</span>)</span>
-<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.4940354</span>, <span class="fl">2.0164275</span>, <span class="fl">1.9513521</span>, <span class="fl">1.5298282</span>, <span class="fl">0.6815670</span>, <span class="fl">2.4267801</span>, <span class="fl">0.6762800</span>, <span class="fl">1.7018986</span>, <span class="fl">4.1632638</span>, <span class="fl">2.5472784</span>, <span class="fl">2.2174151</span>, <span class="fl">0.6058986</span>, <span class="fl">1.7432601</span>, <span class="fl">1.1199216</span>, <span class="fl">1.7135932</span>, <span class="fl">2.8758657</span>, <span class="fl">0.8537880</span>, <span class="fl">1.5511504</span>, <span class="fl">2.3262178</span>, <span class="fl">2.3267933</span>, <span class="fl">1.3916375</span>, <span class="fl">4.7439947</span>, <span class="fl">2.1864812</span>, <span class="fl">2.0269031</span>,<span class="fl">1.7489244</span>, <span class="fl">1.8191036</span>, <span class="fl">2.0845146</span>, <span class="fl">1.2229195</span>, <span class="fl">1.0115042</span>, <span class="fl">2.7931222</span>)</span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="quiz5_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -808,9 +789,9 @@ Exponencial:  101.089198302578
 Logística:  80.2541161161851 </code></pre>
 </div>
 </div>
-<p>A distribuição que apresenta melhor Critério de Informacao de Akaike é a <strong>Gamma</strong>. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que estes dados também seguem a distrbuição <strong>Gamma</strong>, com um nível de significância de 5%.</p>
+<p>A distribuição que apresenta menor Critério de Informação de Akaike é a <strong>Gamma</strong>. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que estes dados também seguem a distribuição <strong>Gamma</strong>, com um nível de significância de 5%.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting of the distribution ' gamma ' by maximum likelihood 
 Parameters:
@@ -818,20 +799,20 @@ Parameters:
 shape 4.697015  1.1722338
 rate  2.448444  0.6449308</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pgamma"</span>, <span class="fl">2.8718513</span>, <span class="fl">0.4555631</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pgamma"</span>, <span class="fl">4.697015</span>, <span class="fl">2.448444</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One-sample Kolmogorov-Smirnov test
 
 data:  dados
-D = 0.76687, p-value = 9.992e-16
+D = 0.094125, p-value = 0.9531
 alternative hypothesis: two-sided</code></pre>
 </div>
 </div>
 <p><strong>c)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">9.534149</span>, <span class="fl">12.878719</span>, <span class="fl">35.635908</span>, <span class="fl">39.158389</span>, <span class="fl">10.091099</span>, <span class="fl">133.714299</span>, <span class="fl">15.684000</span>, <span class="fl">3.179206</span>, <span class="fl">16.073085</span>, <span class="fl">57.767201</span>, <span class="fl">29.543033</span>, <span class="fl">24.672685</span>, <span class="fl">11.955565</span>, <span class="fl">2.132028</span>, <span class="fl">17.455254</span>, <span class="fl">20.569096</span>, <span class="fl">6.293823</span>, <span class="fl">22.717485</span>, <span class="fl">83.353863</span>, <span class="fl">18.544482</span>, <span class="fl">66.437399</span>, <span class="fl">4.616951</span>, <span class="fl">18.931367</span>, <span class="fl">1.464430</span>, <span class="fl">21.180916</span>, <span class="fl">179.315876</span>, <span class="fl">24.941790</span>, <span class="fl">14.105447</span>, <span class="fl">7.680880</span>,<span class="fl">17.688369</span>)</span>
-<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">9.534149</span>, <span class="fl">12.878719</span>, <span class="fl">35.635908</span>, <span class="fl">39.158389</span>, <span class="fl">10.091099</span>, <span class="fl">133.714299</span>, <span class="fl">15.684000</span>, <span class="fl">3.179206</span>, <span class="fl">16.073085</span>, <span class="fl">57.767201</span>, <span class="fl">29.543033</span>, <span class="fl">24.672685</span>, <span class="fl">11.955565</span>, <span class="fl">2.132028</span>, <span class="fl">17.455254</span>, <span class="fl">20.569096</span>, <span class="fl">6.293823</span>, <span class="fl">22.717485</span>, <span class="fl">83.353863</span>, <span class="fl">18.544482</span>, <span class="fl">66.437399</span>, <span class="fl">4.616951</span>, <span class="fl">18.931367</span>, <span class="fl">1.464430</span>, <span class="fl">21.180916</span>, <span class="fl">179.315876</span>, <span class="fl">24.941790</span>, <span class="fl">14.105447</span>, <span class="fl">7.680880</span>,<span class="fl">17.688369</span>)</span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="quiz5_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -895,30 +876,30 @@ Exponencial:  267.86587199743
 Logística:  297.626998043809 </code></pre>
 </div>
 </div>
-<p>A distribuição que apresenta melhor Critério de Informacao de Akaike é a <strong>Lognormal</strong>. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição <strong>Lognormal</strong>, com um nível de significância de 5%.</p>
+<p>A distribuição que apresenta menor Critério de Informação de Akaike é a <strong>Lognormal</strong>. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distribuição <strong>Lognormal</strong>, com um nível de significância de 5%.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(dados, <span class="st">"gamma"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(dados, <span class="st">"lnorm"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Fitting of the distribution ' gamma ' by maximum likelihood 
+<pre><code>Fitting of the distribution ' lnorm ' by maximum likelihood 
 Parameters:
         estimate Std. Error
-shape 1.02495731 0.23329809
-rate  0.03316271 0.00961805</code></pre>
+meanlog 2.869537  0.1971287
+sdlog   1.079718  0.1393905</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pgamma"</span>, <span class="fl">2.8718513</span>, <span class="fl">0.4555631</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"plnorm"</span>, <span class="fl">2.869537</span>, <span class="fl">1.079718</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One-sample Kolmogorov-Smirnov test
 
 data:  dados
-D = 0.65265, p-value = 1.591e-11
+D = 0.10729, p-value = 0.8802
 alternative hypothesis: two-sided</code></pre>
 </div>
 </div>
 <p><strong>d)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.391658</span>, <span class="fl">5.364267</span>, <span class="fl">10.707930</span>, <span class="fl">5.431008</span>, <span class="fl">6.904122</span>, <span class="fl">6.960462</span>, <span class="fl">12.741468</span>, <span class="fl">8.094473</span>, <span class="fl">7.255829</span>, <span class="fl">8.434530</span>, <span class="fl">9.747057</span>, <span class="fl">6.440681</span>, <span class="fl">7.623020</span>, <span class="fl">9.276933</span>, <span class="fl">8.711818</span>, <span class="fl">5.250229</span>, <span class="fl">6.482474</span>, <span class="fl">3.478216</span>, <span class="fl">9.717008</span>, <span class="fl">9.317296</span>, <span class="fl">9.011653</span>, <span class="fl">11.758927</span>, <span class="fl">10.844472</span>, <span class="fl">9.644711</span>, <span class="fl">7.541715</span>, <span class="fl">7.561009</span>, <span class="fl">10.034726</span>, <span class="fl">9.654606</span>, <span class="fl">6.222452</span>, <span class="fl">5.207637</span>)</span>
-<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">4.391658</span>, <span class="fl">5.364267</span>, <span class="fl">10.707930</span>, <span class="fl">5.431008</span>, <span class="fl">6.904122</span>, <span class="fl">6.960462</span>, <span class="fl">12.741468</span>, <span class="fl">8.094473</span>, <span class="fl">7.255829</span>, <span class="fl">8.434530</span>, <span class="fl">9.747057</span>, <span class="fl">6.440681</span>, <span class="fl">7.623020</span>, <span class="fl">9.276933</span>, <span class="fl">8.711818</span>, <span class="fl">5.250229</span>, <span class="fl">6.482474</span>, <span class="fl">3.478216</span>, <span class="fl">9.717008</span>, <span class="fl">9.317296</span>, <span class="fl">9.011653</span>, <span class="fl">11.758927</span>, <span class="fl">10.844472</span>, <span class="fl">9.644711</span>, <span class="fl">7.541715</span>, <span class="fl">7.561009</span>, <span class="fl">10.034726</span>, <span class="fl">9.654606</span>, <span class="fl">6.222452</span>, <span class="fl">5.207637</span>)</span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="quiz5_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -982,61 +963,80 @@ Exponencial:  186.719570908607
 Logística:  138.263602150104 </code></pre>
 </div>
 </div>
-<p>A distribuição que melhor ajusta os dados é a <strong>Weibull</strong>.</p>
+<p>A distribuição que apresenta menor Critério de Informação de Akaike é a <strong>Weibull</strong>. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distribuição <strong>Weibull</strong>, com um nível de significância de 5%.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(dados, <span class="st">"weibull"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting of the distribution ' weibull ' by maximum likelihood 
+Parameters:
+      estimate Std. Error
+shape 4.057284  0.5782002
+scale 8.819386  0.4185798</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"pweibull"</span>, <span class="fl">4.057284</span>, <span class="fl">8.819386</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-sample Kolmogorov-Smirnov test
+
+data:  dados
+D = 0.074926, p-value = 0.996
+alternative hypothesis: two-sided</code></pre>
+</div>
+</div>
 <p><strong>e)</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.816942</span>, <span class="fl">4.123619</span>, <span class="fl">4.575150</span>, <span class="fl">3.214129</span>, <span class="fl">4.854917</span>, <span class="fl">3.647232</span>, <span class="fl">4.003734</span>, <span class="fl">3.261923</span>)</span>
-<span id="cb135-2"><a href="#cb135-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">3.816942</span>, <span class="fl">4.123619</span>, <span class="fl">4.575150</span>, <span class="fl">3.214129</span>, <span class="fl">4.854917</span>, <span class="fl">3.647232</span>, <span class="fl">4.003734</span>, <span class="fl">3.261923</span>)</span>
+<span id="cb137-2"><a href="#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">id_dist</span>(dados);</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Weibull: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-38-2.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-39-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gamma: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-38-3.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-39-3.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Lognormal: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-38-4.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-39-4.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Normal: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-38-5.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-39-5.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Beta: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-38-6.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-39-6.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Uniforme: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-38-7.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-39-7.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Exponencial: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-38-8.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-39-8.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Logística: </code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="quiz5_files/figure-html/unnamed-chunk-38-9.png" class="img-fluid" width="672"></p>
+<p><img src="quiz5_files/figure-html/unnamed-chunk-39-9.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Critério de Informação de Akaike
@@ -1050,7 +1050,26 @@ Exponencial:  39.9275403392093
 Logística:  17.5514378926189 </code></pre>
 </div>
 </div>
-<p>A distribuição que melhor ajusta os dados é a <strong>Lognormal</strong>.</p>
+<p>A distribuição que apresenta menor Critério de Informação de Akaike é a <strong>Uniforme</strong>. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distribuição <strong>Uniforme</strong>, com um nível de significância de 5%.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href="#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdist</span>(dados, <span class="st">"unif"</span>, <span class="at">method=</span><span class="st">"mle"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting of the distribution ' unif ' by maximum likelihood 
+Parameters:
+    estimate Std. Error
+min 3.214129         NA
+max 4.854917         NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href="#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(dados, <span class="st">"punif"</span>, <span class="fl">3.214129</span>, <span class="fl">4.854917</span>, <span class="at">exact=</span><span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-sample Kolmogorov-Smirnov test
+
+data:  dados
+D = 0.22087, p-value = 0.83
+alternative hypothesis: two-sided</code></pre>
+</div>
+</div>
 </section>
 </section>
 

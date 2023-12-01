@@ -55,12 +55,11 @@ iv) Lilliefors
 
 ```{r}
 lillie.test(dados)
-
 ```
 
 **Interpretação dos resultados:**
 
-Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados seguem a distrição normal, pois os p-valores são maiores do que 0,05 para todos os testes de normalidades.
+Considerando um nível de significância de 5%, não se rejeita a hipótese de que os dados amostrais seguem a distrição normal, pois os p-valores são maiores do que 0,05 para todos os testes de normalidade realizados anteriormente.
 
 ------------------------------------------------------------------------
 
@@ -84,7 +83,6 @@ polygon(x = x, y = y, col="gray")
 
 **A probabilidade de que uma chamada demore entre 125 e 150 segundos é de 45,09603%.**
 
-
 #### c) Probabilidade de que uma chamada demore menos de 125 segundos.
 
 ```{r}
@@ -96,8 +94,8 @@ y = c(0, phi(seq(100, 125, l=100)), 0)
 plot(phi, 100, 200)
 polygon(x = x, y = y, col="gray")
 ```
-** A probabilidade de que uma chamada demore menos de 125 segundos é de 4,824296%.**
 
+**A probabilidade de que uma chamada demore menos de 125 segundos é de 4,824296%.**
 
 #### d) Probabilidade de que uma chamada demore entre 145 e 155 segundos.
 
@@ -111,6 +109,7 @@ y = c(0, phi(seq(145, 155, l=100)), 0)
 plot(phi, 100, 200)
 polygon(x = x, y = y, col="gray")
 ```
+
 **A probabilidade de que uma chamada demore entre 145 e 155 segundos é de 26,01309%.**
 
 #### e) Probabilidade de que uma chamada demore entre 160 e 165 segundos.
@@ -125,6 +124,7 @@ y = c(0, phi(seq(160, 165, l=100)), 0)
 plot(phi, 100, 200)
 polygon(x = x, y = y, col="gray")
 ```
+
 **A probabilidade de que uma chamada demore entre 160 e 165 segundos é de 9,387641%.**
 
 ## 2. Identificação de distribuição
@@ -172,37 +172,39 @@ plot(lognormal)
 plot(normal)
 ```
 
-O Critério de Informacao de Akaike (AIC) confirma que **a distribuição Weibull** é a que melhor se ajusta aos dados.
+O Critério de Informação de Akaike (AIC) confirma que **a distribuição Weibull** é a que melhor se ajusta aos dados. Seguem os valores:
 
 ```{r}
-cat(paste("Weibull: ", weibull$aic, "\nGamma: ", gamma$aic, "\nLognormal: ", lognormal$aic, "\nNormal: ", normal$aic, "\nBeta: ", beta$aic))
+cat(paste("Weibull: ", weibull$aic, "\nGamma: ", gamma$aic, "\nLognormal: ", lognormal$aic, "\nNormal: ", normal$aic))
 ```
+
+Ajuste de distribuição e teste de Kolmogorov-Smirnov:
 
 ```{r}
 mle <- fitdist(dados, "weibull", method="mle")
 mle$estimate
 ks.test(dados, "pweibull", shape = 6.513198, scale = 1.918411, exact=FALSE)
 ```
-**Portanto, com um nível de significância de 5%, não se rejeita a hipótese de que os dados se ajustem a uma distribuição Weibull, pois o p-valor é 0,9624.**
 
+**Portanto, com um nível de significância de 5%, não se rejeita a hipótese de que os dados se ajustem a uma distribuição Weibull, pois o p-valor é 0,9624.**
 
 #### b) Compare os resultados gerados pelo teste de Kolmogorov-Smirnov considerando as distribuições Gama, Lognormal e Weibull.
 
 ```{r}
 mle <- fitdist(dados, "gamma", method="mle")
-summary(mle)
+mle
 ks.test(dados, "pgamma", 20.98456, 11.73920, exact = FALSE)
 
 mle <- fitdist(dados, "lnorm", method="mle")
-summary(mle)
+mle
 ks.test(dados, "plnorm", meanlog=0.5568348, sdlog=0.2367576, exact=FALSE)
 
 mle <- fitdist(dados, "weibull", method="mle")
-summary(mle)
+mle
 ks.test(dados, "pweibull", shape = 6.513198, scale = 1.918411, exact=FALSE)
 ```
 
-Todos os testes apresentaram p-valores que não justificam rejeitar as respectivas hipóteses nulas (que os dados seguem as distribuições Gamma, Normal e Weibull, respectivamente), com um nível de significância de 5%. Entretanto, a escolha da função de distribuição que melhor ajusta os dados é a Weibull, pois além de apresentar p-valor = 0.9624, é a que obteve melhor Critério de Informacao de Akaike.
+Todos os testes apresentaram p-valores que não justificam rejeitar as respectivas hipóteses nulas (que os dados seguem as distribuições Gamma, Normal e Weibull, respectivamente), com um nível de significância de 5%. Entretanto, a escolha da função de distribuição que melhor ajusta os dados é a Weibull, pois além de apresentar p-valor = 0.9624, é a que obteve melhor (menor) Critério de Informação de Akaike.
 
 #### c) Plotar a função e o histograma para distribuição escolhida.
 
@@ -251,7 +253,7 @@ shapiro.test(inflacao)
 lillie.test(inflacao)
 ```
 
-Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados amostrais de inflação seguem a distrição normal, considerando que ambos p-valores são maiores do que 0,05.
+Considerando um nível de significância de 5%, não se rejeita a hipótese de que os dados amostrais de inflação seguem a distrição normal, considerando que ambos p-valores são maiores do que 0,05.
 
 #### b) Usando esses dados, construa um intervalo de confiança de 99% para a média da inflação.
 
@@ -265,8 +267,7 @@ gl <- n - 1
 t <- qt(alpha/2, gl, lower.tail = FALSE)
 LI <- x_bar - t*(s/(n^0.5))
 LS <- x_bar + t*(s/(n^0.5))
-cat (LI, LS)
-LS - LI
+cat(paste0("[", LI, ", ", LS, "]"))
 ```
 
 Portanto, pode-se afirmar com nível de confiaça de 99% que a média da inflação estará no intervalo \[3.457911, 8.674089\].
@@ -278,14 +279,14 @@ Portanto, pode-se afirmar com nível de confiaça de 99% que a média da inflaç
 t <- ((3/2) * sqrt(n)) / s
 LI <- x_bar - t*(s/(n^0.5))
 LS <- x_bar + t*(s/(n^0.5))
-print(paste0("Intervalo: [", LI, ", " , LS, "]"))
+cat(paste0("Intervalo: [", LI, ", " , LS, "]"))
 alpha <- 2 * (pt(t, df = gl, lower.tail=FALSE))
 alpha
 c <- 1 - alpha
 c
 ```
 
-O intervalo [4.566,7.566] de comprimento total igual a 3 é obtido para um alpha = 0.09443553 e, portanto, o nível de confiança necessário é de 90,55645%.
+O intervalo \[4.566,7.566\] de comprimento total igual a 3 é obtido para um alpha = 0.09443553 e, portanto, o nível de confiança necessário é de 90,55645%.
 
 #### d) Construa um intervalo de confiança de 90% para o desvio padrão.
 
@@ -299,7 +300,7 @@ intervalo <- (n - 1) * s^2 / c(q2_2, q2_1)
 intervalo
 ```
 
-Portanto, o intervalo de confiaça de 99% para média da amostra da inflação é \[3.426025 17.432443\].
+Portanto, o intervalo de confiaça de 90% para média da amostra da inflação é \[3.426025 17.432443\].
 
 #### e) Agora, teste a normalidade para toda a série histórica desde o início do regime de metas. Ou seja, utilize os dados de inflação efetiva de 1999 até 2022. Qual a conclusão?
 
@@ -309,22 +310,27 @@ length(inflacao)
 ```
 
 Como a amostra tem menos de 30 observações, será utilizado o teste de Shapiro-Wilk.
+
 ```{r}
 shapiro.test(inflacao)
 ```
+
 Considerando um nível de significância de 5%, não rejeita-se a hipótese de que os dados da inflação para os anos de 1999 até 2022 seguem a distrição normal. É possível chegar na mesma conclusão aplicando-se os testes de Anderson-Darling e Kolmogorov-Smirnov.
+
 ```{r warning=FALSE}
 ad.test(inflacao)
 ks.test(scale(inflacao), "pnorm", 0, 1)
 lillie.test(inflacao)
 ```
-Entretanto, pelo teste de Lilliefors (p-value = 0.01631), rejeita-se a hipótese de que os dados da inflação para os anos de 1999 até 2022 seguem a distrição normal, com 5% de significância.
+
+Entretanto, pelo teste de Lilliefors (p-value = 0.01631), rejeita-se a hipótese de que os dados da inflação para os anos de 1999 até 2022 seguem a distrição normal, com nível de 5% significância.
 
 ### 4. Identificação de distribuição
 
 Identifique a distribuição de cada um dos conjuntos de dados mostrado a seguir.
 
 **a)**
+
 ```{r }
 dados <- c(20.8625807, 7.2445709, 4.4659396, 3.2712081, 4.9300651, 5.7444213, 6.6700987, 11.1750446, 2.3753017, 3.5425386, 0.5978486, 6.8869953, 6.1102197, 8.2716973, 9.7465462, 3.3991988, 1.8557047, 11.3983705, 3.6847590, 2.3327479, 6.1364329, 4.4686122, 7.8007834, 4.7649257, 3.8829371, 5.9986131, 5.5163819, 9.6951710, 10.1645820, 6.1304865)
 
@@ -371,53 +377,66 @@ id_dist <- function (dados) {
 
 id_dist(dados);
 ```
-A distribuição que apresenta melhor Critério de Informacao de Akaike é a **Gamma**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição **Gamma**, com um nível de significância de 5%.
+
+A distribuição que apresenta menor Critério de Informação de Akaike é a **Gamma**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distribuição **Gamma**, com um nível de significância de 5%.
+
 ```{r}
 fitdist(dados, "gamma", method="mle")
 ks.test(dados, "pgamma", 2.8718513, 0.4555631, exact=FALSE)
 ```
 
 **b)**
+
 ```{r}
 dados <- c(1.4940354, 2.0164275, 1.9513521, 1.5298282, 0.6815670, 2.4267801, 0.6762800, 1.7018986, 4.1632638, 2.5472784, 2.2174151, 0.6058986, 1.7432601, 1.1199216, 1.7135932, 2.8758657, 0.8537880, 1.5511504, 2.3262178, 2.3267933, 1.3916375, 4.7439947, 2.1864812, 2.0269031,1.7489244, 1.8191036, 2.0845146, 1.2229195, 1.0115042, 2.7931222)
 id_dist(dados);
 
 ```
-A distribuição que apresenta melhor Critério de Informacao de Akaike é a **Gamma**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que estes dados também seguem a distrbuição **Gamma**, com um nível de significância de 5%.
+
+A distribuição que apresenta menor Critério de Informação de Akaike é a **Gamma**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que estes dados também seguem a distribuição **Gamma**, com um nível de significância de 5%.
+
 ```{r}
 fitdist(dados, "gamma", method="mle")
 ks.test(dados, "pgamma", 4.697015, 2.448444, exact=FALSE)
 ```
 
-**c)**  
+**c)**
+
 ```{r}
 dados <- c(9.534149, 12.878719, 35.635908, 39.158389, 10.091099, 133.714299, 15.684000, 3.179206, 16.073085, 57.767201, 29.543033, 24.672685, 11.955565, 2.132028, 17.455254, 20.569096, 6.293823, 22.717485, 83.353863, 18.544482, 66.437399, 4.616951, 18.931367, 1.464430, 21.180916, 179.315876, 24.941790, 14.105447, 7.680880,17.688369)
 id_dist(dados);
 ```
 
-A distribuição que apresenta melhor Critério de Informacao de Akaike é a **Lognormal**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição **Lognormal**, com um nível de significância de 5%.
+A distribuição que apresenta menor Critério de Informação de Akaike é a **Lognormal**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distribuição **Lognormal**, com um nível de significância de 5%.
+
 ```{r}
 fitdist(dados, "lnorm", method="mle")
 ks.test(dados, "plnorm", 2.869537, 1.079718, exact=FALSE)
 ```
 
-**d)**  
+**d)**
+
 ```{r}
 dados <- c(4.391658, 5.364267, 10.707930, 5.431008, 6.904122, 6.960462, 12.741468, 8.094473, 7.255829, 8.434530, 9.747057, 6.440681, 7.623020, 9.276933, 8.711818, 5.250229, 6.482474, 3.478216, 9.717008, 9.317296, 9.011653, 11.758927, 10.844472, 9.644711, 7.541715, 7.561009, 10.034726, 9.654606, 6.222452, 5.207637)
 id_dist(dados);
 ```
-A distribuição que apresenta melhor Critério de Informacao de Akaike é a **Weibull**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição **Weibull**, com um nível de significância de 5%.
+
+A distribuição que apresenta menor Critério de Informação de Akaike é a **Weibull**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distribuição **Weibull**, com um nível de significância de 5%.
+
 ```{r}
 fitdist(dados, "weibull", method="mle")
 ks.test(dados, "pweibull", 4.057284, 8.819386, exact=FALSE)
 ```
 
-**e)**  
+**e)**
+
 ```{r}
 dados <- c(3.816942, 4.123619, 4.575150, 3.214129, 4.854917, 3.647232, 4.003734, 3.261923)
 id_dist(dados);
 ```
-A distribuição que apresenta melhor Critério de Informacao de Akaike é a **Uniforme**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distrbuição **Uniforme**, com um nível de significância de 5%.
+
+A distribuição que apresenta menor Critério de Informação de Akaike é a **Uniforme**. Portanto, realiza-se o teste de Kolmogorov-Smirnov e não se rejeita a hipótese de que os dados seguem a distribuição **Uniforme**, com um nível de significância de 5%.
+
 ```{r}
 fitdist(dados, "unif", method="mle")
 ks.test(dados, "punif", 3.214129, 4.854917, exact=FALSE)
