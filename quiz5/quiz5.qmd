@@ -1,25 +1,18 @@
 ---
-title: ""
+title: "Probabilidade e Estatística - QUIZ 5"
+subtitle: "Instituto Tecnológico de Aeronáutica"
+author: "Alexandre A. A. M. de Abreu"
 format:
-  html:
-    code-overflow: wrap
-prefer-html: true
+  pdf
+keep-tex: true
 lang: pt-BR
+include-in-header: 
+  text: |
+    \usepackage{fvextra}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
 ---
 
-::: {style="text-align:center"}
-<h1>Probabilidade e Estatística - QUIZ 5</h1>
-:::
-
 ![](images/ita.jpg){fig-align="center" width="200"}
-
-::: {style="text-align:center; font-size:20px;"}
-**Instituto Tecnológico de Aeronáutica**
-
-**Professor**: Mauri Aparecido de Oliveira
-
-**Aluno**: Alexandre A. A. M. de Abreu
-:::
 
 ## 1. Distribuição Normal
 
@@ -127,6 +120,8 @@ polygon(x = x, y = y, col="gray")
 
 **A probabilidade de que uma chamada demore entre 160 e 165 segundos é de 9,387641%.**
 
+------------------------------------------------------------------------
+
 ## 2. Identificação de distribuição
 
 Dados de uma variável aleatória X:
@@ -209,7 +204,7 @@ Todos os testes apresentaram p-valores que não justificam rejeitar as respectiv
 #### c) Plotar a função e o histograma para distribuição escolhida.
 
 ```{r warning=FALSE}
-w_2_1 <- rweibull(1500, shape = 6.513198, scale = 1.918411)
+w_2_1 <- rweibull(3000, shape = 6.513198, scale = 1.918411)
 hist(w_2_1, lwd = 1, ylab = "f(x)", xlab = "", freq = F, main = "")
 lines(x = density(w_2_1))
 ```
@@ -237,6 +232,8 @@ y = c(0, w(seq(q1, q2, l=100)), 0)
 plot(w, 0, 4)
 polygon(x = x, y = y, col="gray")
 ```
+
+------------------------------------------------------------------------
 
 ## 3. Normalidade e intervalo de confiança
 
@@ -305,7 +302,7 @@ Portanto, o intervalo de confiaça de 90% para média da amostra da inflação �
 #### e) Agora, teste a normalidade para toda a série histórica desde o início do regime de metas. Ou seja, utilize os dados de inflação efetiva de 1999 até 2022. Qual a conclusão?
 
 ```{r}
-inflacao <- c(8.94,5.97,7.67,12.53,9.3,7.6,5.69,3.14,4.46,5.9,4.31,5.91,6.5,5.84,5.91,6.41,10.67,6.29,2.95,3.75,4.31,4.52,10.06,5.79)
+inflacao <- c(8.94, 5.97, 7.67, 12.53, 9.3, 7.6, 5.69, 3.14, 4.46, 5.9, 4.31, 5.91, 6.5, 5.84, 5.91, 6.41, 10.67, 6.29, 2.95, 3.75, 4.31, 4.52, 10.06, 5.79)
 length(inflacao)
 ```
 
@@ -324,6 +321,8 @@ lillie.test(inflacao)
 ```
 
 Entretanto, pelo teste de Lilliefors (p-value = 0.01631), rejeita-se a hipótese de que os dados da inflação para os anos de 1999 até 2022 seguem a distrição normal, com nível de 5% significância.
+
+------------------------------------------------------------------------
 
 ### 4. Identificação de distribuição
 
@@ -346,21 +345,27 @@ id_dist <- function (dados) {
   uniforme <- fitdist(dados, "unif", method = "mle")
   exponencial <- fitdist(dados, "exp", method = "mle")
   logistica <- fitdist(dados, "logis", method = "mle")
-  summary(dados_norm)
   cat("Weibull: ")
   plot(weibull)
+  
   cat("Gamma: ")
   plot(gamma)
+  
   cat("Lognormal: ")
   plot(lognormal)
+  
   cat("Normal: ") 
   plot(normal)
+  
   cat("Beta: ")
   plot(beta)
+  
   cat("Uniforme: ")
   plot(uniforme)
+  
   cat("Exponencial: ")
   plot(exponencial)
+  
   cat("Logística: ")
   plot(logistica)
   
